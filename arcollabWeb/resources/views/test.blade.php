@@ -1,7 +1,4 @@
-<?php
-//$node = Node::create(['name' => 'First Node', 'email' => 'node1@email.com']);
-//$result = Node::find(5);
-?>
+
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +41,10 @@
         <div class="container">
             <div class="content">
                 <div class="title">Test Page</div>
-                {{ $result['name'] }}
+                <?php
+                //$result->name = 'Second Node';
+                //$result->save();
+				?>
             </div>
         </div>
     </body>
