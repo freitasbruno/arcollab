@@ -15,6 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/projects', function () {
+    return view('projects');
+});
+
+Route::post('newProject', function () {
+	$project = new Project;
+	$project->name = Input::get('name');
+	$project->save();
+	
+    return view('projects');
+});
+
 Route::get('/about', function () {
     return 'route to about page';
 });
@@ -71,19 +87,4 @@ Route::get('/neoTestModify', function () {
 			$relation->save();
     	}
     }
-});
-
-// Deletes all nodes, does NOT reset the id's in the database
-Route::get('/neoReset', function () {
-    $nodes = Node::all();
-    foreach($nodes as $node){
-    	$node->delete();
-    }
-    return 'database cleared';
-});
-
-Route::get('/neoTest', function () {
-    $node = Node::find(1);
-    
-    return $node->name;
 });
