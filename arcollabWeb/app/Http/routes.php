@@ -27,12 +27,23 @@ Route::get('/projects', function () {
     return view('projects');
 });
 
+Route::get('/project/{project_id}', function ($project_id) {
+	$project = Project::find($project_id);
+	return view("project")->with('project', $project);
+});
+
 Route::post('newProject', function () {
 	$project = new Project;
 	$project->name = Input::get('name');
 	$project->save();
 	
     return view('projects');
+});
+
+Route::get('/deleteProject/{id}', function ($id) {
+	$project = Project::find($id);
+	$project->delete();
+    return Redirect::to('projects');
 });
 
 Route::get('/about', function () {

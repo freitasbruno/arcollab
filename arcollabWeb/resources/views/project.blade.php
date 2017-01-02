@@ -4,7 +4,7 @@
 
 	<!-- Jumbotron Header -->
     <header class="jumbotron hero-spacer">
-        <h1>ARCOLLAB</h1>
+        <h1>{{ $project->name }}</h1>
         <h3>AEC Information Management</h3>
         <p>A Laravel + Neo4j open source solution for AEC information management. It is meant to allow to track project information, storing files, allow comments and issue management.</p>
         <p><a class="btn btn-primary btn-large">Call to action!</a>
