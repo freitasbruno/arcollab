@@ -1,10 +1,7 @@
 <?php
-
 use Vinelab\NeoEloquent\Schema\Blueprint;
 use Vinelab\NeoEloquent\Migrations\Migration;
-
 class CreateGroupLabel extends Migration {
-
     /**
      * Run the migrations.
      *
@@ -17,7 +14,6 @@ class CreateGroupLabel extends Migration {
         	
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -30,5 +26,4 @@ class CreateGroupLabel extends Migration {
             Neo4jSchema::drop('Group');
         });
     }
-
 }

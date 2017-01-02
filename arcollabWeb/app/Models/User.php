@@ -1,11 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends \NeoEloquent
 {
+	
+	protected $label = 'User';
+	
     /**
      * The attributes that are mass assignable.
      *

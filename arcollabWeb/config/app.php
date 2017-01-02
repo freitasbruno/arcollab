@@ -211,6 +211,7 @@ return [
         'NeoEloquent' => \NeoEloquent::class,
         'Node' => App\Models\Node::class,
         'Project' => App\Models\Project::class,
+        'User' => App\Models\User::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
 

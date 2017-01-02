@@ -23,10 +23,16 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('projects', array(
+	'middleware' => 'auth', 
+	function () {
+		return view('projects');
+}));
+/*
 Route::get('/projects', function () {
     return view('projects');
 });
-
+*/
 Route::get('/project/{project_id}', function ($project_id) {
 	$project = Project::find($project_id);
 	return view("project")->with('project', $project);
@@ -40,17 +46,54 @@ Route::post('newProject', function () {
     return view('projects');
 });
 
-Route::get('/deleteProject/{id}', function ($id) {
+Route::get('deleteProject/{id}', function ($id) {
 	$project = Project::find($id);
 	$project->delete();
     return Redirect::to('projects');
 });
 
-Route::get('/about', function () {
+Route::get('about', function () {
     return 'route to about page';
 });
 
-Route::get('/neoTestNodes', function () {
+Route::get('register', function () {
+	return view('register');
+});
+
+Route::post('register', function () {
+	$user = new User;
+	$user->email = Input::get('email');
+	$user->name = Input::get('name');
+	$user->password = Hash::make(Input::get('password'));
+	$user->save();
+	
+	$theEmail = Input::get('email');
+	return view('thanks', array('theEmail' => $theEmail));
+});
+
+Route::get('login', function () {
+	return view('login');
+});
+
+Route::post('login', function () {
+	$credentials = Input::only('email', 'password');
+	$user = User::where('email', $credentials['email'])->first();
+	$password = $credentials['password'];
+	
+	if(Hash::check($password, $user->password)) {
+		$user1 = Auth::user();
+		session()->put('user_id', $user->id);
+		return Redirect::to('projects');
+	}
+	return view('login');
+});
+
+Route::get('logout', function () {
+	Auth::logout();
+	return view('logout');
+});
+
+Route::get('neoTestNodes', function () {
 	for($i=0; $i<5; $i++){
 		$node = new Node;
 	    $node->name = 'Test Node ' . $i;
@@ -58,7 +101,7 @@ Route::get('/neoTestNodes', function () {
 	}
 });
 
-Route::get('/neoTestRelations', function () {
+Route::get('neoTestRelations', function () {
 	/*
 	One-To-One
 	->hasOne()
@@ -80,7 +123,7 @@ Route::get('/neoTestRelations', function () {
 	$relation->save();
 });
 
-Route::get('/neoTestModify', function () {
+Route::get('neoTestModify', function () {
 	$node1 = Node::find(1);
 	$node2 = Node::find(3);
 	$node1->name = $node1->name . ' - modified';

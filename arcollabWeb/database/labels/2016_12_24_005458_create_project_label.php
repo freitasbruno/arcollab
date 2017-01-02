@@ -1,10 +1,7 @@
 <?php
-
 use Vinelab\NeoEloquent\Schema\Blueprint;
 use Vinelab\NeoEloquent\Migrations\Migration;
-
 class CreateProjectLabel extends Migration {
-
     /**
      * Run the migrations.
      *
@@ -17,7 +14,6 @@ class CreateProjectLabel extends Migration {
             //
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -30,5 +26,4 @@ class CreateProjectLabel extends Migration {
             //
         });
     }
-
 }

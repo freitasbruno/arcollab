@@ -1,5 +1,6 @@
 <?php
 	$projects = Project::all();
+	$user = Auth::user();
 ?>
 
 @extends('layouts.master')
