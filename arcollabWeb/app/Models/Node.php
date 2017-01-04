@@ -12,7 +12,7 @@ class Node extends \NeoEloquent {
         return $this->hasOne('Node', 'HAS ONE');
     }
     
-        public function likes()
+    public function likes()
     {
         return $this->hasMany('Node', 'LIKES');
     }

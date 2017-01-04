@@ -17,7 +17,7 @@
 	</div>
 	<div class="spacer40"></div>
 	<div class="text-center">
-    	<h4><a href="{{ URL::to('login') }}" >Already a user? Login here!</a></h4>
+    	<h4><a href="{{ URL::to('login') }}">Already a user? Login here!</a></h4>
     </div>
 
 @stop

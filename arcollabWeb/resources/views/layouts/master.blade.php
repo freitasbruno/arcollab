@@ -40,8 +40,9 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="#">ARCOLLAB</a>
+	                <a class="navbar-brand" href="/home">ARCOLLAB</a>
 	            </div>
 	            <!-- Collect the nav links, forms, and other content for toggling -->
 	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,10 +51,17 @@
 	                        <a href="/home">HOME</a>
 	                    </li>
 	                    <li>
-	                        <a href="projects">PROJECTS</a>
+	                        <a href="/projects">PROJECTS</a>
 	                    </li>
 	                    <li>
 	                        <a href="/about">ABOUT</a>
+	                    </li>
+	                    <li>
+	                    	@if(is_null(session()->get('user_id')))
+	                        	<a href="/login">LOGIN</a>
+	                        @else
+	                        	<a href="/logout">LOGOUT</a>
+	                        @endif
 	                    </li>
 	                </ul>
 	            </div>

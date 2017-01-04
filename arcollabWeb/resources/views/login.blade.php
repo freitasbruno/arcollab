@@ -18,7 +18,4 @@
 	<div class="spacer40"></div>
     <h4 class="text-center"><a href="{{ URL::to('register') }}" >Don't have a username? Register here!</a></h4>
 	<div class="spacer60"></div>
-	<pre>
-		{{ session()->get('user_id') }}
-	</pre>
 @stop

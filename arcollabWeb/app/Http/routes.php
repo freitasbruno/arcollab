@@ -23,40 +23,47 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('projects', array(
-	'middleware' => 'auth', 
-	function () {
-		return view('projects');
-}));
-/*
 Route::get('/projects', function () {
-    return view('projects');
+	$user = User::find(session()->get('user_id'));
+	$projects = $user->hasProject;
+	
+	if (is_null(session()->get('user_id'))){
+		return view('login');
+	}else{
+		$user_id = session()->get('user_id');
+		$user = User::find($user_id);
+		return view('projects', array('user'=>$user, 'projects'=>$projects));
+	}
 });
-*/
 Route::get('/project/{project_id}', function ($project_id) {
 	$project = Project::find($project_id);
 	return view("project")->with('project', $project);
 });
 
-Route::post('newProject', function () {
+Route::post('/newProject', function () {
+	$user = User::find(session()->get('user_id'));
+	
 	$project = new Project;
 	$project->name = Input::get('name');
 	$project->save();
 	
-    return view('projects');
+	$relation = $user->hasProject()->save($project);
+	$relation->save();
+	
+    return Redirect::to('projects');
 });
 
-Route::get('deleteProject/{id}', function ($id) {
+Route::get('/deleteProject/{id}', function ($id) {
 	$project = Project::find($id);
 	$project->delete();
     return Redirect::to('projects');
 });
 
-Route::get('about', function () {
+Route::get('/about', function () {
     return 'route to about page';
 });
 
-Route::get('register', function () {
+Route::get('/register', function () {
 	return view('register');
 });
 
@@ -67,30 +74,33 @@ Route::post('register', function () {
 	$user->password = Hash::make(Input::get('password'));
 	$user->save();
 	
-	$theEmail = Input::get('email');
-	return view('thanks', array('theEmail' => $theEmail));
+	return view('login', array('theEmail' => $user->email));
 });
 
-Route::get('login', function () {
-	return view('login');
+Route::get('/login', function () {
+	$session_id = session()->get('user_id');
+	if (is_null($session_id)){
+		return view('login');
+	}else{
+		return view('projects');
+	}
 });
 
 Route::post('login', function () {
 	$credentials = Input::only('email', 'password');
 	$user = User::where('email', $credentials['email'])->first();
 	$password = $credentials['password'];
-	
 	if(Hash::check($password, $user->password)) {
-		$user1 = Auth::user();
 		session()->put('user_id', $user->id);
-		return Redirect::to('projects');
+		return redirect('projects');
+	}else{
+		return ('no success');
 	}
-	return view('login');
 });
 
-Route::get('logout', function () {
-	Auth::logout();
-	return view('logout');
+Route::get('/logout', function () {
+	session()->clear();
+	return view('home');
 });
 
 Route::get('neoTestNodes', function () {

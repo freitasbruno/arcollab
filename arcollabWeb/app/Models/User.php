@@ -26,4 +26,9 @@ class User extends \NeoEloquent
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function hasProject()
+    {
+        return $this->hasMany('Project', 'CREATED_PROJECT');
+    }
 }
