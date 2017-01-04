@@ -210,8 +210,11 @@ return [
 		
         'NeoEloquent' => \NeoEloquent::class,
         'Node' => App\Models\Node::class,
-        'Project' => App\Models\Project::class,
         'User' => App\Models\User::class,
+        'Project' => App\Models\Project::class,
+        'Group' => App\Models\Group::class,
+        'Issue' => App\Models\Issue::class,
+        'Comment' => App\Models\Comment::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
 

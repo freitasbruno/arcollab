@@ -34,6 +34,7 @@
             	<h3>New Project</h3>
                 {!! BootForm::open(array('url' => 'newProject')) !!}
 					{!! BootForm::text('name', false) !!}
+					<!-- {!! Form::file('image') !!} -->
 					{!! BootForm::submit('Create') !!}
 				{!! BootForm::close() !!}
             </div>

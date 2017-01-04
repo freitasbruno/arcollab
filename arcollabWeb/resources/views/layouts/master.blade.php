@@ -51,18 +51,24 @@
 	                        <a href="/home">HOME</a>
 	                    </li>
 	                    <li>
-	                        <a href="/projects">PROJECTS</a>
-	                    </li>
-	                    <li>
 	                        <a href="/about">ABOUT</a>
 	                    </li>
-	                    <li>
-	                    	@if(is_null(session()->get('user_id')))
-	                        	<a href="/login">LOGIN</a>
-	                        @else
-	                        	<a href="/logout">LOGOUT</a>
-	                        @endif
-	                    </li>
+                    	@if(is_null(session()->get('user_id')))
+                    		<li>
+                    			<a href="/register">REGISTER</a>
+                    		</li>
+                    		<li>
+                    			<a href="/login">LOGIN</a>
+                    		</li>
+                        	
+                        @else
+                        	<li>
+                    			<a href="/projects">PROJECTS</a>
+                    		</li>
+                    		<li>
+                    			<a href="/logout">LOGOUT</a>
+                    		</li>
+                        @endif
 	                </ul>
 	            </div>
 	            <!-- /.navbar-collapse -->

@@ -24,20 +24,18 @@ Route::get('/home', function () {
 });
 
 Route::get('/projects', function () {
-	$user = User::find(session()->get('user_id'));
-	$projects = $user->hasProject;
-	
 	if (is_null(session()->get('user_id'))){
-		return view('login');
+		return Redirect::to('login');
 	}else{
-		$user_id = session()->get('user_id');
-		$user = User::find($user_id);
+		$user = User::find(session()->get('user_id'));
+		$projects = $user->hasProject;
 		return view('projects', array('user'=>$user, 'projects'=>$projects));
 	}
 });
 Route::get('/project/{project_id}', function ($project_id) {
 	$project = Project::find($project_id);
-	return view("project")->with('project', $project);
+	$groups = $project->groups;
+	return view("project", ['project' => $project, 'groups' => $groups]);
 });
 
 Route::post('/newProject', function () {
@@ -45,6 +43,14 @@ Route::post('/newProject', function () {
 	
 	$project = new Project;
 	$project->name = Input::get('name');
+	/*
+	if (Input::hasFile('image')) {
+		return 'loop';
+		$file = Input::file('image');
+		Input::file('image')->move('/uploads');
+		$project->image = Input::file('image')->getClientOriginalName();
+	}
+	*/
 	$project->save();
 	
 	$relation = $user->hasProject()->save($project);
@@ -57,6 +63,22 @@ Route::get('/deleteProject/{id}', function ($id) {
 	$project = Project::find($id);
 	$project->delete();
     return Redirect::to('projects');
+});
+
+Route::post('/newGroup', function () {
+	$user = User::find(session()->get('user_id'));
+	
+	$project_id = Input::get('project_id');
+	$project = Project::find($project_id);
+	$group = new Group;
+	$group->name = Input::get('name');
+	$group->save();
+	
+	$relation = $project->groups()->save($group);
+	$relation->createdBy = $user->id;
+	$relation->save();
+	
+    return Redirect::to('project/'.$project_id);
 });
 
 Route::get('/about', function () {
