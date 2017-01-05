@@ -1,5 +1,7 @@
 ## Basic setup for your RaspberryPi
 
+[Back to arcollab Logs](/README.md)
+
 https://mattwilcox.net/web-development/setting-up-a-secure-home-web-server-with-raspberry-pi
 
     Assemble the Pi, plug in a keyboard, mouse and screen. Don’t plug the Ethernet cable just yet, we’ll go through some security steps to help prevent undesirable access to our device.
