@@ -68,9 +68,8 @@ Route::get('/deleteProject/{id}', function ($id) {
 
 Route::get('/group/{group_id}', function ($group_id) {
 	$group = Group::find($group_id);
-	//$issues = $group->issues;
-	//return view("group", ['group' => $group, 'issues' => $issues]);
-	return view("group", ['group' => $group]);
+	$items = $group->items;
+	return view("group", ['group' => $group, 'items' => $items]);
 });
 
 Route::post('/newGroup', function () {
@@ -94,6 +93,40 @@ Route::get('/deleteGroup/{id}', function ($id) {
 	// redirect to parent project or group
 	$group = Group::find($id);
 	$group->delete();
+    return Redirect::to('projects');
+});
+
+Route::get('/item/{item_id}', function ($item_id) {
+	$item = Item::find($item_id);
+	$comments = $item->comments;
+	return view("item", ['item' => $item, 'comments' => $comments]);
+});
+
+Route::post('/newItem', function () {
+	$user = User::find(session()->get('user_id'));
+	
+	//$project_id = Input::get('project_id');
+	//$project = Project::find($project_id);
+	$group_id = Input::get('group_id');
+	$group = Group::find($group_id);
+	
+	$item = new Item;
+	$item->title = Input::get('title');
+	$item->description = Input::get('description');
+	$item->save();
+	
+	$relation = $group->items()->save($item);
+	$relation->createdBy = $user->id;
+	$relation->save();
+	
+    return Redirect::to('group/'.$group_id);
+});
+
+Route::get('/deleteItem/{id}', function ($id) {
+	// get parent project
+	// redirect to parent project or group
+	$item = Item::find($id);
+	$item->delete();
     return Redirect::to('projects');
 });
 

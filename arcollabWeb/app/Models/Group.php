@@ -7,9 +7,9 @@ class Group extends \NeoEloquent {
     protected $label = 'Group';
     protected $fillable = ['name'];
     
-    public function project()
+    public function items()
     {
-        return $this->belongsTo('Project', 'HAS_GROUP');
+        return $this->hasMany('Item', 'HAS_ITEM');
     }
 }
 

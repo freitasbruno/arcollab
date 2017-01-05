@@ -213,7 +213,7 @@ return [
         'User' => App\Models\User::class,
         'Project' => App\Models\Project::class,
         'Group' => App\Models\Group::class,
-        'Issue' => App\Models\Issue::class,
+        'Item' => App\Models\Item::class,
         'Comment' => App\Models\Comment::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
