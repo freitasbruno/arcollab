@@ -32,3 +32,13 @@ footer {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.project-icon-heading {
+    height: 350px;
+    background-size: cover;
+}
+
+textarea {
+	width: 100%;
+	max-width: 100%;
+}

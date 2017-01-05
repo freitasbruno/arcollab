@@ -32,6 +32,7 @@ Route::get('/projects', function () {
 		return view('projects', array('user'=>$user, 'projects'=>$projects));
 	}
 });
+
 Route::get('/project/{project_id}', function ($project_id) {
 	$project = Project::find($project_id);
 	$groups = $project->groups;
@@ -65,6 +66,13 @@ Route::get('/deleteProject/{id}', function ($id) {
     return Redirect::to('projects');
 });
 
+Route::get('/group/{group_id}', function ($group_id) {
+	$group = Group::find($group_id);
+	//$issues = $group->issues;
+	//return view("group", ['group' => $group, 'issues' => $issues]);
+	return view("group", ['group' => $group]);
+});
+
 Route::post('/newGroup', function () {
 	$user = User::find(session()->get('user_id'));
 	
@@ -79,6 +87,14 @@ Route::post('/newGroup', function () {
 	$relation->save();
 	
     return Redirect::to('project/'.$project_id);
+});
+
+Route::get('/deleteGroup/{id}', function ($id) {
+	// get parent project
+	// redirect to parent project or group
+	$group = Group::find($id);
+	$group->delete();
+    return Redirect::to('projects');
 });
 
 Route::get('/about', function () {
