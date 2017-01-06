@@ -12,7 +12,34 @@
 @stop
 
 @section('content') 
+	@if(!empty($groups))
+		<div class="row row-centered">
+		@foreach($groups as $group)
+			<div class="col-lg-3 col-md-4 col-sm-6 col-centered">
+				<div class="panel panel-default panel-profile">
+					<div class="panel-heading"><h3>{{ $group->name }}</h3></div>
+					<div class="panel-body text-center">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						<a href="/group/{{ $group->id }}" class="btn btn-primary">OPEN</a>
+		                <a href="/deleteGroup/{{ $group->id }}" class="btn btn-default">Delete</a>
+					</div>
+					<ul class="list-group">
+					  	<li class="list-group-item">
+					    	<span class="badge">14</span>
+					    	PROJECT ISSUES
+					  	</li>
+					  	<li class="list-group-item">
+					    	<span class="badge">5</span>
+					    	PENDING ISSUES
+					  	</li>
+					</ul>
+				</div>
+		    </div>
+		@endforeach
+		</div>
+	@endif
 	@if(!empty($items))
+		<div class="row row-centered">
 		@foreach($items as $item)
 			<div class="col-lg-3 col-md-4 col-sm-6 col-centered">
 				<div class="panel panel-default panel-profile">
@@ -25,6 +52,7 @@
 				</div>
 		    </div>
 		@endforeach
+		</div>
 	@endif
 	
 	<div class="row row-centered">

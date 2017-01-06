@@ -15,12 +15,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('upload', function() {
+  return ('image uploaded');
+});
+
 Route::get('/startbootstrap', function () {
     return view('startbootstrap');
 });
 
 Route::get('/home', function () {
     return view('home');
+});
+
+Route::post('/newTeam', function () {
+	$user = User::find(session()->get('user_id'));
+	
+	$team = new Team;
+	$team->name = Input::get('name');
+	$team->save();
+
+	$relation = $user->teams()->save($team);
+	$relation->createdBy = $user->id;
+	$relation->save();
+	
+    return back();
 });
 
 Route::get('/projects', function () {
@@ -39,26 +57,7 @@ Route::get('/project/{project_id}', function ($project_id) {
 	return view("project", ['project' => $project, 'groups' => $groups]);
 });
 
-Route::post('/newProject', function () {
-	$user = User::find(session()->get('user_id'));
-	
-	$project = new Project;
-	$project->name = Input::get('name');
-	/*
-	if (Input::hasFile('image')) {
-		return 'loop';
-		$file = Input::file('image');
-		Input::file('image')->move('/uploads');
-		$project->image = Input::file('image')->getClientOriginalName();
-	}
-	*/
-	$project->save();
-	
-	$relation = $user->hasProject()->save($project);
-	$relation->save();
-	
-    return Redirect::to('projects');
-});
+Route::post('newProject', 'UploadController@upload');
 
 Route::get('/deleteProject/{id}', function ($id) {
 	$project = Project::find($id);
@@ -69,23 +68,34 @@ Route::get('/deleteProject/{id}', function ($id) {
 Route::get('/group/{group_id}', function ($group_id) {
 	$group = Group::find($group_id);
 	$items = $group->items;
-	return view("group", ['group' => $group, 'items' => $items]);
+	$groups = $group->groups;
+	return view("group", ['group' => $group, 'items' => $items, 'groups' => $groups]);
 });
 
 Route::post('/newGroup', function () {
 	$user = User::find(session()->get('user_id'));
 	
-	$project_id = Input::get('project_id');
-	$project = Project::find($project_id);
 	$group = new Group;
 	$group->name = Input::get('name');
 	$group->save();
 	
-	$relation = $project->groups()->save($group);
+	if (!empty(Input::get('project_id'))){
+	    $project_id = Input::get('project_id');
+	    $project = Project::find($project_id);
+	    $relation = $project->groups()->save($group);
+	    $redirect = 'project/'.$project_id;
+	}elseif (!empty(Input::get('group_id'))){
+	    $parentGroup_id = Input::get('group_id');
+	    $parentGroup = Group::find($parentGroup_id);
+	    $relation = $parentGroup->groups()->save($group);
+	    $redirect = 'group/'.$parentGroup_id;
+	}else{
+	    return back();
+	}
 	$relation->createdBy = $user->id;
 	$relation->save();
 	
-    return Redirect::to('project/'.$project_id);
+    return Redirect::to($redirect);
 });
 
 Route::get('/deleteGroup/{id}', function ($id) {
@@ -128,6 +138,23 @@ Route::get('/deleteItem/{id}', function ($id) {
 	$item = Item::find($id);
 	$item->delete();
     return Redirect::to('projects');
+});
+
+Route::post('/newComment', function () {
+	$user = User::find(session()->get('user_id'));
+	
+	$item_id = Input::get('item_id');
+	$item = Item::find($item_id);
+	
+	$comment = new Comment;
+	$comment->description = Input::get('comment');
+	$comment->save();
+	
+	$relation = $item->comments()->save($comment);
+	$relation->createdBy = $user->id;
+	$relation->save();
+	
+    return Redirect::to('item/'.$item_id);
 });
 
 Route::get('/about', function () {

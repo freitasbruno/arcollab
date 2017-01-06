@@ -6,6 +6,11 @@ class Group extends \NeoEloquent {
 
     protected $label = 'Group';
     protected $fillable = ['name'];
+
+    public function groups()
+    {
+        return $this->hasMany('Group', 'HAS_GROUP');
+    }
     
     public function items()
     {

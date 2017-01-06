@@ -31,4 +31,9 @@ class User extends \NeoEloquent
     {
         return $this->hasMany('Project', 'CREATED_PROJECT');
     }
+    
+    public function teams()
+    {
+        return $this->hasMany('Team', 'CREATED_TEAM');
+    }
 }

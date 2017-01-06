@@ -215,6 +215,7 @@ return [
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
         'Comment' => App\Models\Comment::class,
+        'Team' => App\Models\Team::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
 
