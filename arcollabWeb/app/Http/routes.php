@@ -27,18 +27,53 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/teams', function () {
+	if (is_null(session()->get('user_id'))){
+		return Redirect::to('login');
+	}else{
+		$user = User::find(session()->get('user_id'));
+		$teams = $user->teams;
+		return view('teams', array('user'=>$user, 'teams'=>$teams));
+	}
+});
+
+Route::get('/team/{team_id}', function ($team_id) {
+	$team = Team::find($team_id);
+	$teams = $team->teams;
+	return view("team", ['team' => $team, 'teams' => $teams]);
+});
+
 Route::post('/newTeam', function () {
 	$user = User::find(session()->get('user_id'));
 	
 	$team = new Team;
 	$team->name = Input::get('name');
 	$team->save();
-
-	$relation = $user->teams()->save($team);
-	$relation->createdBy = $user->id;
-	$relation->save();
 	
-    return back();
+	if (!empty(Input::get('project_id'))){
+	    $project_id = Input::get('project_id');
+	    $project = Project::find($project_id);
+	    $relation = $project->teams()->save($team);
+	    $redirect = 'project/'.$project_id;
+	}elseif (!empty(Input::get('team_id'))){
+	    $parentTeam_id = Input::get('team_id');
+	    $parentTeam = Team::find($parentTeam_id);
+	    $relation = $parentTeam->teams()->save($team);
+	    $redirect = 'team/'.$parentTeam_id;
+	}else{
+		$relation = $user->teams()->save($team);
+		$relation->createdBy = $user->id;
+		$relation->save();
+		return back();
+	}
+	
+    return Redirect::to($redirect);
+});
+
+Route::get('/deleteTeam/{id}', function ($id) {
+	$team = Team::find($id);
+	$team->delete();
+    return Redirect::to('teams');
 });
 
 Route::get('/projects', function () {

@@ -41,6 +41,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
 	                </button>
 	                <a class="navbar-brand" href="/home">ARCOLLAB</a>
 	            </div>
@@ -64,6 +65,9 @@
                         @else
                         	<li>
                     			<a href="/projects">PROJECTS</a>
+                    		</li>
+                    		<li>
+                    			<a href="/teams">TEAMS</a>
                     		</li>
                     		<li>
                     			<a href="/logout">LOGOUT</a>
