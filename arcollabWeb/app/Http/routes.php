@@ -89,7 +89,8 @@ Route::get('/projects', function () {
 Route::get('/project/{project_id}', function ($project_id) {
 	$project = Project::find($project_id);
 	$groups = $project->groups;
-	return view("project", ['project' => $project, 'groups' => $groups]);
+	$teams = $project->teams;
+	return view("project", ['project' => $project, 'groups' => $groups, 'teams' => $teams]);
 });
 
 Route::post('newProject', 'UploadController@upload');
