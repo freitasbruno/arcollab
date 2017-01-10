@@ -16,6 +16,11 @@ class Team extends \NeoEloquent {
     {
         return $this->hasMany('Team', 'HAS_TEAM');
     }
+    
+    public function parentProject()
+    {
+        return $this->belongsTo('Project', 'ASSIGNED_TO_TEAM');
+    }
 }
 
 ?>

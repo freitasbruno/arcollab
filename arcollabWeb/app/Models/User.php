@@ -36,4 +36,9 @@ class User extends \NeoEloquent
     {
         return $this->hasMany('Team', 'CREATED_TEAM');
     }
+    
+    public function assignedTeams()
+    {
+        return $this->belongsToMany('Team', 'HAS_USER');
+    }
 }

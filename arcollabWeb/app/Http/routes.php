@@ -27,6 +27,16 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::post('/addUser', function () {
+	$user = User::find(Input::get('user'));
+	$team = Team::find(Input::get('team_id'));
+	
+	$relation = $team->users()->save($user);
+	$users = $team->users;
+	
+    return Redirect::to('team/'.$team->id);
+});
+
 Route::get('/teams', function () {
 	if (is_null(session()->get('user_id'))){
 		return Redirect::to('login');
@@ -82,7 +92,16 @@ Route::get('/projects', function () {
 	}else{
 		$user = User::find(session()->get('user_id'));
 		$projects = $user->hasProject;
-		return view('projects', array('user'=>$user, 'projects'=>$projects));
+		
+		$sharedProjects = array();
+		$teams = $user->assignedTeams;
+		if (!empty($teams)){
+			foreach ($teams as $team){
+				$project = $team->parentProject;
+				array_push($sharedProjects, $project);
+			}
+		}
+		return view('projects', array('user'=>$user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
 	}
 });
 
@@ -184,10 +203,10 @@ Route::post('/newComment', function () {
 	
 	$comment = new Comment;
 	$comment->description = Input::get('comment');
+	$comment->createdBy = $user->id;
 	$comment->save();
 	
 	$relation = $item->comments()->save($comment);
-	$relation->createdBy = $user->id;
 	$relation->save();
 	
     return Redirect::to('item/'.$item_id);

@@ -1,3 +1,8 @@
+<?php 
+$users = User::all();
+$teamUsers = $team->users;
+?>
+
 @extends('layouts.master')
 
 @section('header')
@@ -12,7 +17,26 @@
 @stop
 
 @section('content') 
-
+	<div class="col-lg-3 col-md-4 col-sm-6 col-centered">
+	
+	@if(!empty($teamUsers))
+		@foreach($teamUsers as $teamUser)
+			<p>{{ $teamUser->name }}</p>
+			<p>{{ $teamUser->email }}</p>
+		@endforeach
+	@endif
+		
+	{!! BootForm::open(array('url' => 'addUser')) !!}
+		{!! BootForm::hidden('team_id', $team->id) !!}
+		<select class="form-control" name="user">
+			@foreach($users as $user)
+		    	<option value="{{ $user->id }}">{{ $user->name }}</option>
+		    @endforeach
+		</select>
+		{!! BootForm::submit('Add User') !!}
+	{!! BootForm::close() !!}
+	</div>
+	
 	@if(!empty($teams))
 		@foreach($teams as $childTeam)
 			<div class="col-lg-3 col-md-4 col-sm-6 col-centered">
@@ -23,16 +47,7 @@
 						<a href="/team/{{ $childTeam->id }}" class="btn btn-primary">OPEN</a>
 		                <a href="/deleteTeam/{{ $childTeam->id }}" class="btn btn-default">Delete</a>
 					</div>
-					<ul class="list-group">
-					  	<li class="list-group-item">
-					    	<span class="badge">14</span>
-					    	PROJECT ISSUES
-					  	</li>
-					  	<li class="list-group-item">
-					    	<span class="badge">5</span>
-					    	PENDING ISSUES
-					  	</li>
-					</ul>
+					
 				</div>
 		    </div>
 		@endforeach

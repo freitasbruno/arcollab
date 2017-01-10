@@ -16,6 +16,11 @@ class Group extends \NeoEloquent {
     {
         return $this->hasMany('Item', 'HAS_ITEM');
     }
+    
+    public function parentProject()
+    {
+        return $this->belongsTo('Project', 'HAS_GROUP');
+    }
 }
 
 ?>

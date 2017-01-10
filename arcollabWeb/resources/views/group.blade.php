@@ -1,3 +1,9 @@
+<?php
+
+	$proj = $group->parentProject;
+	
+?>
+
 @extends('layouts.master')
 
 @section('header')
@@ -6,6 +12,8 @@
     <header class="jumbotron hero-spacer">
         <h1>{!! $group->name !!}</h1>
         <p>{!! $group->description !!}</p>
+        
+        
         <p><a class="btn btn-primary btn-large">Call to action!</a></p>
     </header>
     
