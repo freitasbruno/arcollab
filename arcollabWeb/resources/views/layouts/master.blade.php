@@ -18,6 +18,7 @@
 	
 	    <!-- Custom CSS -->
 	    {!! Html::style('css/style.css') !!}
+	    {!! Html::style('css/uikit.min.css') !!}
 	
 	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,7 +38,6 @@
 	            <div class="navbar-header">
 	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	                    <span class="sr-only">Toggle navigation</span>
-	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
@@ -65,9 +65,6 @@
                         @else
                         	<li>
                     			<a href="/projects">PROJECTS</a>
-                    		</li>
-                    		<li>
-                    			<a href="/teams">TEAMS</a>
                     		</li>
                     		<li>
                     			<a href="/logout">LOGOUT</a>
@@ -110,6 +107,9 @@
 	
 	    <!-- Bootstrap Core JavaScript -->
 	    {!! Html::script('js/bootstrap.min.js') !!}
+	    
+	    <!-- UI Kit JavaScript -->
+	    {!! Html::script('js/uikit.min.js') !!}
 	</body>
 
 </html>
