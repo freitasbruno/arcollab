@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/uk', function () {
+    return view('uk');
+});
+
 Route::get('upload', function() {
   return ('image uploaded');
 });

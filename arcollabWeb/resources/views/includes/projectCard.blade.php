@@ -1,20 +1,17 @@
-<div class="col-lg-2 col-md-3 col-sm-6 col-centered">
-    <div class="uk-card uk-card-default">
-        <a href="/project/{{ $project->id }}">
+<div>
+	<div class="uk-card uk-card-default uk-card-hover">
+	    <a href="/project/{{ $project->id }}">
 		@if (!is_null($project->imageFilename))
-			<div class="uk-card-header project-icon-heading" style="background-image: url('{!! asset('/uploads/'.$project->imageFilename) !!}'); background-position:center"></div>
+			<div class="uk-card-header project-icon-heading uk-background-cover" style="background-image: url('{!! asset('/uploads/'.$project->imageFilename) !!}');"></div>
 		@else
 			<div class="uk-card-header project-icon-heading" style="background-color: rgb({!! rand(1,255) !!},{!! rand(1,255) !!},{!! rand(1,255) !!});"></div>
 		@endif
 		</a>
-		<div class="panel-body">
+		<div class="uk-card-body">
 			<h3>{{ $project->name }}</h3>
-            <a href="/project/{{ $project->id }}">
-            	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </a>
-            <a href="/deleteProject/{{ $project->id }}">
-            	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </a>
+			<p>{{ $project->description }}</p>
+	        <a href="/project/{{ $project->id }}" uk-icon="icon: pencil"></a>
+	        <a href="/deleteProject/{{ $project->id }}" uk-icon="icon: trash"></a>
 		</div>
-    </div>
+	</div>
 </div>

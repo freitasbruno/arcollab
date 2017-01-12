@@ -15,15 +15,17 @@ class UploadController extends Controller {
 	
 		$project = new Project;
 		$project->name = Input::get('name');
-		$project->save();
+		$project->description = Input::get('description');
+		//$project->save();
 		
 		$relation = $user->hasProject()->save($project);
-		$relation->save();
+		//$relation->save();
 		
 		// getting all of the post data
 		$file = array('image' => Input::file('image'));
+		
 		// setting up rules
-		$rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+		$rules = array('image' => 'required'); //mimes:jpeg,bmp,png and for max size max:10000
 		// doing the validation, passing post data, rules and the messages
 		$validator = Validator::make($file, $rules);
 		if ($validator->fails()) {
