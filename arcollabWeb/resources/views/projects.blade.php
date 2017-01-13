@@ -1,13 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-	<div class="uk-section uk-padding-remove-vertical uk-text-center">
-    	<div class="uk-container">
-			<h1>
-		    	PROJECTS
-		    </h1>
-		</div>
-	</div>    
+
 @stop
 
 @section('content')

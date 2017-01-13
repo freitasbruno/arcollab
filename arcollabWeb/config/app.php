@@ -159,6 +159,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         Vinelab\NeoEloquent\NeoEloquentServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*

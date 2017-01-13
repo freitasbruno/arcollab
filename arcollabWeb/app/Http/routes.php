@@ -12,23 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/uk', function () {
-    return view('uk');
-});
-
-Route::get('upload', function() {
-  return ('image uploaded');
-});
-
-Route::get('/startbootstrap', function () {
-    return view('startbootstrap');
+    return view('home');
 });
 
 Route::get('/home', function () {
     return view('home');
+});
+
+Route::get('upload', function() {
+  return ('image uploaded');
 });
 
 Route::post('/addUser', function () {
@@ -128,7 +120,8 @@ Route::get('/group/{group_id}', function ($group_id) {
 	$group = Group::find($group_id);
 	$items = $group->items;
 	$groups = $group->groups;
-	return view("group", ['group' => $group, 'items' => $items, 'groups' => $groups]);
+	$project = parentProject($group_id);
+	return view("group", ['group' => $group, 'project' => $project, 'items' => $items, 'groups' => $groups]);
 });
 
 Route::post('/newGroup', function () {

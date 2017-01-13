@@ -1,16 +1,19 @@
 <div>
-	<div class="panel panel-default panel-profile">
-		<a href="/team/{{ $team->id }}">
-		<div class="panel-heading project-icon-heading" style="background-color: rgb({!! rand(1,255) !!},{!! rand(1,255) !!},{!! rand(1,255) !!});"></div>
+	<div class="uk-card uk-card-default uk-card-hover">
+	    <a href="/team/{{ $team->id }}">
+			<div class="uk-card-secondary uk-card-header uk-text-center">
+				<h3><span class="uk-margin-right" uk-icon="icon: users; ratio: 1.5"></span>{{ $team->name }}</h3>
+			</div>
 		</a>
-		<div class="panel-body">
-			<h3>{{ $team->name }}</h3>
-            <a href="/team/{{ $team->id }}">
-            	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </a>
-            <a href="/deleteTeam/{{ $team->id }}">
-            	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </a>
+		<div class="uk-card-body">
+			<p>{{ $team->description }}</p>
+	        <a href="/team/{{ $team->id }}" uk-icon="icon: pencil"></a>
+	        <a href="/deleteTeam/{{ $team->id }}" uk-icon="icon: trash"></a>
+		</div>
+		<div class="uk-card-footer">
+			<ul class="uk-list uk-list-divider">
+			  	<li><span class="uk-badge">14</span>USERS</li>
+			</ul>
 		</div>
 	</div>
 </div>

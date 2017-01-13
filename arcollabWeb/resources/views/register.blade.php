@@ -1,23 +1,28 @@
 @extends('layouts.master')
 
 @section('header')
-	<h1>REGISTER</h1>
+
 @stop
 
 @section('content') 
-	<div class="spacer40"></div>
-	<div class="col-md-4 col-centered">
-		{!! BootForm::open(array('url' => 'register')) !!}
-			{!! BootForm::text('name') !!}
-			{!! BootForm::email() !!}
-			{!! BootForm::password() !!}
-			<div class="spacer20"></div>
-			{!! BootForm::submit('Register') !!}
-		{!! BootForm::close() !!}
+	<div class="uk-section uk-text-center">
+    	<div class="uk-container">
+			<div class="uk-card uk-card-default uk-card-hover uk-width-1-3@m uk-position-center">
+			    <div class="uk-card-header uk-card-secondary">
+			        <h3 class="uk-card-title">LOGIN</h3>
+			    </div>
+			    <div class="uk-card-body">
+					{!! Form::open(array('url' => 'register', 'class' => 'uk-form')) !!}
+						{!! Form::text('name', '', array('class' => 'uk-input uk-form-large uk-margin-small', 'placeholder' => 'John Doe')) !!}
+						{!! Form::email('email', '', array('class' => 'uk-input uk-form-large uk-margin-small', 'placeholder' => 'Email Address')) !!}
+						{!! Form::password('password', array('class' => 'uk-input uk-form-large uk-margin-small', 'placeholder' => 'Password')) !!}
+						{!! Form::submit('GO!', array('class' => 'uk-margin-small uk-button uk-button-default uk-button-large uk-width-1-1 uk-button-primary')) !!}
+					{!! Form::close() !!}
+			    </div>
+			    <div class="uk-card-footer">
+			        <a href="{{ URL::to('login') }}">Already a user? Login here!</a>
+			    </div>
+			</div>
+	    </div>
 	</div>
-	<div class="spacer40"></div>
-	<div class="text-center">
-    	<h4><a href="{{ URL::to('login') }}">Already a user? Login here!</a></h4>
-    </div>
-
 @stop

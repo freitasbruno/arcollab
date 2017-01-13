@@ -23,7 +23,7 @@
 	
 	<body>	
 		<!-- Navigation -->
-		<nav class="uk-navbar-container uk-margin" uk-navbar>
+		<nav class="uk-navbar-container" uk-navbar>
 		    <!-- left -->
 		    <div class="uk-navbar-left">
 		    	<a class="uk-navbar-item uk-logo" href="/home">ARCOLLAB</a>
