@@ -6,9 +6,10 @@ $items = $group->items;
 <div>
 	<div class="uk-card uk-card-default uk-card-hover">
 	    <a href="/group/{{ $group->id }}">
-			<div class="uk-card-secondary uk-card-header uk-text-center">
-				<h3><span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.5"></span>{{ $group->name }}</h3>
-				<p>{{ $group->description }}</p>
+			<div class="uk-card-secondary uk-card-header uk-padding-small">
+				<h4 class="uk-margin-remove-bottom">
+				<span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.3"></span><span class="uk-text-bottom">{{ $group->name }}</span>
+				</h4>
 			</div>
 		</a>
 		<div class="uk-card-body uk-padding-remove">
@@ -43,21 +44,13 @@ $items = $group->items;
 			    </table>
 			</div>
 			@endif
-			
-	        <a href="/group/{{ $group->id }}" uk-icon="icon: pencil"></a>
-	        <a href="/deleteGroup/{{ $group->id }}" uk-icon="icon: trash"></a>
 		</div>
-		<div class="uk-card-footer">
-			<ul class="uk-list uk-list-divider">
-			  	<li>
-			    	<span class="uk-badge">14</span>
-			    	PROJECT ISSUES
-			  	</li>
-			  	<li>
-			    	<span class="uk-badge">5</span>
-			    	PENDING ISSUES
-			  	</li>
-			</ul>
+		<div class="uk-card-footer uk-padding-small">	
+			<p class="uk-padding-remove-vertical">
+				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Group Issues
+				<br>
+				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Unread Issues
+			</p>
 		</div>
 	</div>
 </div>

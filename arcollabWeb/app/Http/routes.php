@@ -24,7 +24,8 @@ Route::get('upload', function() {
 });
 
 Route::post('/addUser', function () {
-	$user = User::find(Input::get('user'));
+	$email = User::find(Input::get('email'));
+	$user = User::where('email', 'freitascbruno@gmail.com')->first();
 	$team = Team::find(Input::get('team_id'));
 	
 	$relation = $team->users()->save($user);
@@ -33,20 +34,17 @@ Route::post('/addUser', function () {
     return Redirect::to('team/'.$team->id);
 });
 
-Route::get('/teams', function () {
-	if (is_null(session()->get('user_id'))){
-		return Redirect::to('login');
-	}else{
-		$user = User::find(session()->get('user_id'));
-		$teams = $user->teams;
-		return view('teams', array('user'=>$user, 'teams'=>$teams));
-	}
+Route::get('/teams/{project_id}', function ($project_id) {
+		$project = Project::find($project_id);
+		$teams = $project->teams;
+		return view('teams', array('project'=>$project, 'teams'=>$teams));
 });
 
 Route::get('/team/{team_id}', function ($team_id) {
+	$project = teamParentProject($team_id);
 	$team = Team::find($team_id);
 	$teams = $team->teams;
-	return view("team", ['team' => $team, 'teams' => $teams]);
+	return view("team", ['team' => $team, 'teams' => $teams, 'project' => $project]);
 });
 
 Route::post('/newTeam', function () {
@@ -167,8 +165,6 @@ Route::get('/item/{item_id}', function ($item_id) {
 Route::post('/newItem', function () {
 	$user = User::find(session()->get('user_id'));
 	
-	//$project_id = Input::get('project_id');
-	//$project = Project::find($project_id);
 	$group_id = Input::get('group_id');
 	$group = Group::find($group_id);
 	

@@ -6,7 +6,7 @@ $comments = $item->comments;
 	<div class="uk-card uk-card-default uk-card-hover">
 	    <a href="/item/{{ $item->id }}">
 			<div class="uk-card-secondary uk-card-header uk-text-center">
-				<h3><span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.5"></span>{{ $item->title }}</h3>
+				<h4><span class="uk-margin-right" uk-icon="icon: warning; ratio: 1.3"></span>{{ $item->title }}</h4>
 				<p>{{ $item->description }}</p>
 			</div>
 		</a>
@@ -18,7 +18,7 @@ $comments = $item->comments;
 			        <tbody>
 						@foreach ($comments as $comment)
 				            <tr>
-				                <td><span uk-icon="icon: warning"></span></td>
+				                <td><span uk-icon="icon: comment"></span></td>
 				                <td>{!! $comment->description !!}</td>
 				            </tr>
 						@endforeach	            
@@ -27,9 +27,6 @@ $comments = $item->comments;
 			</div>
 			@endif
 			@include('includes/formNewComment')
-			
-	        <a href="/item/{{ $item->id }}" uk-icon="icon: pencil"></a>
-	        <a href="/deleteItem/{{ $item->id }}" uk-icon="icon: trash"></a>
 		</div>
 	</div>
 </div>

@@ -21,6 +21,11 @@ class Team extends \NeoEloquent {
     {
         return $this->belongsTo('Project', 'ASSIGNED_TO_TEAM');
     }
+    
+    public function parentTeamt()
+    {
+        return $this->belongsTo('Team', 'ASSIGNED_TO_TEAM');
+    }
 }
 
 ?>

@@ -1,7 +1,9 @@
 <div>
 	<div class="uk-card uk-card-default uk-card-hover">
-		<div class="uk-card-header uk-card-primary uk-text-center">
-			<h3><span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.5"></span>New Group</h3>
+		<div class="uk-card-primary uk-card-header uk-padding-small">
+			<h4 class="uk-margin-remove-bottom">
+			<span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.3"></span><span class="uk-text-bottom">New Group</span>
+			</h4>
 		</div>
 		<div class="uk-margin-small-left uk-margin-small-right uk-card-body">
 			{!! Form::open(array('url' => 'newGroup', 'class' => 'uk-form')) !!}

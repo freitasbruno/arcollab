@@ -1,3 +1,17 @@
 .project-icon-heading {
     height: 200px;
 }
+
+.comment-header {
+	background-color:#d6d9db;
+}
+
+.comment-body {
+	background-color:#f9fcff;
+}
+
+.bgAlpha {
+	background-color:#FFF;
+	background-color:rgba(255, 255, 255, 0.5);
+}
+

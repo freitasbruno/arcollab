@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterBgImage')
 
 @section('header')
 
@@ -7,7 +7,7 @@
 @section('content')
 	<div class="uk-section uk-text-center">
     	<div class="uk-container">
-			<div class="uk-card uk-card-default uk-card-hover uk-width-1-3@m uk-position-center">
+			<div class="uk-card uk-card-default uk-width-1-3@m uk-position-center">
 			    <div class="uk-card-header uk-card-secondary">
 			        <h3 class="uk-card-title">LOGIN</h3>
 			    </div>
