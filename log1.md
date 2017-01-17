@@ -56,7 +56,7 @@ sudo apt-get install git-all
 
 ### Setting up the Pi as a server
 
-For this step I followed yet another usefull post, full article [here] (http://valentinvannay.com/2016/01/21/installation-of-a-web-server-and-laravel-5-on-a-raspberry-pi-2/).
+For this step I followed yet another usefull post, full article [here](http://valentinvannay.com/2016/01/21/installation-of-a-web-server-and-laravel-5-on-a-raspberry-pi-2/).
 We basically need to install the LAMP stack, which comprises Apache, PHP and MySQL.
 
 * Install Apache 
@@ -95,16 +95,16 @@ We basically need to install the LAMP stack, which comprises Apache, PHP and MyS
 
 ### Install PHPmyAdmin
 
-Detailed tutorial [here] (https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-12-04).
+Detailed tutorial [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-12-04).
 
 
 ### Install Codiad
 
-I've installed codiad to allow me to develop my project directly on the Pi. There's a good set of instructions [here] (https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-codiad-a-web-based-ide-on-an-ubuntu-vps) to install it.
+I've installed codiad to allow me to develop my project directly on the Pi. There's a good set of instructions [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-codiad-a-web-based-ide-on-an-ubuntu-vps) to install it.
 
 ### Install Laravel
 
-Laravel uses [Composer] (https://getcomposer.org/download/) to manage its dependencies, you can install it from the command line with the following commands:
+Laravel uses [Composer](https://getcomposer.org/download/) to manage its dependencies, you can install it from the command line with the following commands:
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -121,5 +121,5 @@ php -r "unlink('composer-setup.php');"
 ### Install Neo4j
 
 Although I installed it this particular project will not be using a SQL database, but a Graph database instead.
-Read about the installation steps [here] (https://neo4j.com/docs/operations-manual/current/installation/linux/debian/).
+Read about the installation steps [here](https://neo4j.com/docs/operations-manual/current/installation/linux/debian/).
 
