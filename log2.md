@@ -2,27 +2,33 @@
 
 [Back to arcollab Logs](/README.md)
 
-sudo apt-get install php5-curl
-
+* Setup folder permissions
+```
 sudo usermod -a -G groupname username
 sudo chmod g+w myfolder
+```
 
-Add to composer.json
+### Configure Laravel to work with Neo4j and [Neoeloquent] (https://github.com/Vinelab/NeoEloquent) (usefull OGM)
 
+* Add to composer.json
+
+```
 {
     "require": {
         "vinelab/neoeloquent": "1.4.*"
     }
 }
+```
 
-Add the service provider in config/app.php:
+* Add the service provider in config/app.php:
 
-'Vinelab\NeoEloquent\NeoEloquentServiceProvider',
+`'Vinelab\NeoEloquent\NeoEloquentServiceProvider',`
 
-Run composer update
+* Run `composer update` 
 
-Add to config/database.php
+* Add to config/database.php
 
+```
 'default' => 'neo4j',
 
 'connections' => [
@@ -34,29 +40,32 @@ Add to config/database.php
         'password' => 'j4oen'
     ]
 ]
+```
 
 ### MIGRATIONS
 
-    create the folder database/labels
-    modify composer.json and add "database/labels" to the classmap array
-    run composer dump-autoload
+* create the folder database/labels
+* modify composer.json and add "database/labels" to the classmap array
+* run composer dump-autoload
 
 ### Models
 
-Create a app/Models folder > create a test model Node.php
+* Create a app/Models folder > create a test model Node.php
 
+```
 <?php
 
 namespace App\Models;
 
 class Node extends \NeoEloquent {
-
 }
 
 ?>
+```
 
-Add the models aliases in config/app.php
+* Add the models aliases in config/app.php
 
- 'NeoEloquent' => \NeoEloquent::class,
- 'Node' => App\Models\Node::class,
-
+```
+'NeoEloquent' => \NeoEloquent::class,
+'Node' => App\Models\Node::class,
+```

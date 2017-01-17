@@ -25,7 +25,7 @@ Route::get('upload', function() {
 
 Route::post('/addUser', function () {
 	$email = User::find(Input::get('email'));
-	$user = User::where('email', 'freitascbruno@gmail.com')->first();
+	$user = User::where('email', $email)->first();
 	$team = Team::find(Input::get('team_id'));
 	
 	$relation = $team->users()->save($user);
