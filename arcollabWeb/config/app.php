@@ -210,13 +210,13 @@ return [
       	'BootForm' => Watson\BootstrapForm\Facades\BootstrapForm::class,
 		
         'NeoEloquent' => \NeoEloquent::class,
-        'Node' => App\Models\Node::class,
         'User' => App\Models\User::class,
         'Project' => App\Models\Project::class,
         'Group' => App\Models\Group::class,
         'Item' => App\Models\Item::class,
         'Comment' => App\Models\Comment::class,
         'Team' => App\Models\Team::class,
+        'Tag' => App\Models\Tag::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
 

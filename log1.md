@@ -3,7 +3,7 @@
 [Back to arcollab Logs](/README.md)
 
 This project is being developed on a rapsberry pi home server, using open source technologies for the development of the aplication.
-I followed some usefull instructions for setting up the Pi, you can read the full article [here] (https://mattwilcox.net/web-development/setting-up-a-secure-home-web-server-with-raspberry-pi)
+I followed some usefull instructions for setting up the Pi, you can read the full article [here](https://mattwilcox.net/web-development/setting-up-a-secure-home-web-server-with-raspberry-pi)
 
 ### Installing Raspian
 

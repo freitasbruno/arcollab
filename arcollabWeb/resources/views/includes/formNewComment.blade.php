@@ -1,7 +1,7 @@
-<div class="uk-margin-small-left uk-margin-small-right uk-card-body">
-	{!! Form::open(array('url' => 'newComment', 'class' => 'uk-form')) !!}
+<div class="uk-margin-remove uk-padding-small uk-margin-small-right uk-card-body">
+	{!! Form::open(array('url' => 'newComment', 'class' => 'uk-form uk-grid-small uk-match-height')) !!}
 		{!! Form::hidden('item_id', $item->id) !!}
-		{!! Form::textarea('comment', null, array('class' => 'uk-textarea uk-margin-small', 'placeholder' => 'Comment...', 'rows' => '2')) !!}
-		{!! Form::submit('Comment', array('class' => 'uk-margin-small uk-button uk-button-primary uk-width-1-1')) !!}
+		{!! Form::textarea('comment', null, array('class' => 'uk-textarea', 'placeholder' => 'Comment...', 'rows' => '2')) !!}
+		{!! Form::submit('Send', array('class' => 'uk-button uk-width-1-1')) !!}
 	{!! Form::close() !!}
 </div>

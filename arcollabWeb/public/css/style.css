@@ -2,6 +2,10 @@
     height: 200px;
 }
 
+.project-header {
+    min-height: 150px;
+}
+
 .comment-header {
 	background-color:#d6d9db;
 }
@@ -15,3 +19,63 @@
 	background-color:rgba(255, 255, 255, 0.5);
 }
 
+/*
+Color Scheme
+https://coolors.co/db7d59-eca400-07677b-96be84-edf9ca
+https://coolors.co/db7d59-774f47-07677b-96be84-edf9ca
+*/
+.teamColor {
+	background-color:#774f47;
+}
+
+.teamColor:hover {
+	background-color:#6d4841;
+}
+
+.teamColorLight {
+	background-color:#a88f89;
+}
+
+.itemColor {
+	background-color:#db7d59;
+}
+
+.itemColor:hover {
+	background-color:#d76f47;
+}
+
+.itemColorLight {
+	background-color:#ebb8a4;
+}
+
+.groupColor {
+	background-color:#077187; 
+}
+
+.groupColor:hover {
+	background-color:#065363;
+}
+
+.groupColorLight {
+	background-color:#bbd8de;
+}
+
+.tagColor {
+	background-color:#96be84;
+}
+
+.tagColor:hover {
+	background-color:#7fb069;
+}
+
+.tagColorLight {
+	background-color:#cfe1c7;
+}
+
+.commentColor {
+	background-color:#eaf8bf;
+}
+
+.commentColor:hover {
+	background-color:#d5e2ae;
+}

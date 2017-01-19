@@ -24,6 +24,14 @@ function teamParentProject($team_id) {
 	}
 }
 
+function itemParentProject($item_id) {
+	$item = Item::find($item_id);
+	$group = $item->parentGroup;
+	$project = parentProject($group->id);
+	
+	return $project;
+}
+
 function countProjectGroups($project) {
 	$groups = $project->groups;
 	$count = count($groups);

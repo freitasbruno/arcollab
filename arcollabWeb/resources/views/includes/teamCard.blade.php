@@ -5,8 +5,11 @@ $users = $team->users;
 
 <div>
 	<div class="uk-card uk-card-default uk-card-hover">
+		<div class="uk-position-small uk-position-right uk-light">
+			<a href="/deleteTeam/{{ $team->id }}" uk-icon="icon: close; ratio: 0.8"></a>
+		</div>
 	    <a href="/team/{{ $team->id }}">
-			<div class="uk-card-secondary uk-card-header uk-padding-small">
+			<div class="uk-card-secondary uk-card-header uk-padding-small teamColor">
 				<h4 class="uk-margin-remove-bottom">
 				<span class="uk-margin-right" uk-icon="icon: users; ratio: 1.3"></span><span class="uk-text-bottom">{{ $team->name }}</span>
 				</h4>

@@ -6,6 +6,6 @@ $users = User::all();
 	{!! Form::open(array('url' => 'addUser', 'class' => 'uk-form')) !!}
 		{!! Form::hidden('team_id', $team->id) !!}
 		{!! Form::email('email', '', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Email Address')) !!}
-		{!! Form::submit('Add User', array('class' => 'uk-margin-small uk-button uk-button-primary uk-width-1-1')) !!}
+		{!! Form::submit('Add User', array('class' => 'uk-margin-small uk-button uk-width-1-1')) !!}
 	{!! Form::close() !!}
 </div>

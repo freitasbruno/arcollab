@@ -5,9 +5,13 @@ $items = $group->items;
 
 <div>
 	<div class="uk-card uk-card-default uk-card-hover">
-	    <a href="/group/{{ $group->id }}">
-			<div class="uk-card-secondary uk-card-header uk-padding-small">
-				<h4 class="uk-margin-remove-bottom">
+		<div class="uk-position-small uk-position-right uk-light">
+			<a href="/deleteGroup/{{ $group->id }}" uk-icon="icon: close; ratio: 0.8"></a>
+		</div>
+	    <a href="/group/{{ $group->id }}" class="uk-link-reset">
+			<div class="uk-card-secondary uk-card-header uk-padding-small groupColor">
+				
+		   		<h4 class="uk-margin-remove-vertical">
 				<span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.3"></span><span class="uk-text-bottom">{{ $group->name }}</span>
 				</h4>
 			</div>
@@ -27,23 +31,37 @@ $items = $group->items;
 				</table>
 			</div>
 			@endif
-			
-			@if(count($items) >= 1)
+				
 			<div class="uk-overflow-auto">
-			    <table class="uk-table uk-table-hover uk-table-middle">
-			        <tbody>
-						@foreach ($items as $item)
-				            <tr>
-				                <td><span uk-icon="icon: warning"></span></td>
-				                <td class="uk-table-link">
-				                    <a class="uk-link-reset" href="/item/{{ $item->id }}">{!! $item->title !!}</a>
-				                </td>
-				            </tr>
-						@endforeach	            
-			        </tbody>
-			    </table>
+				<ul uk-accordion>
+					@if(count($items) >= 1)
+				    <li>
+				        <h3 class="uk-accordion-title uk-padding-small">{!! count($items)!!} ISSUES</h3>
+				        <div class="uk-accordion-content">
+				        	<ul class="uk-list">
+							    <li>
+									<table class="uk-table uk-table-hover uk-table-middle">
+								        <tbody>
+											@foreach ($items as $item)
+									            <tr>
+									                <td><span uk-icon="icon: warning"></span></td>
+									                <td class="uk-table-link">
+									                    <a class="uk-link-reset" href="/item/{{ $item->id }}">{!! $item->title !!}</a>
+									                </td>
+									            </tr>
+											@endforeach
+								        </tbody>
+								    </table>			    	
+							    </li>
+							</ul>
+				        </div>
+				    </li>
+				    @else
+				    	<li><h4 class="uk-padding-small uk-margin-remove-bottom">NO ISSUES</h4></li>
+				    @endif
+				</ul>
 			</div>
-			@endif
+			
 		</div>
 		<div class="uk-card-footer uk-padding-small">	
 			<p class="uk-padding-remove-vertical">

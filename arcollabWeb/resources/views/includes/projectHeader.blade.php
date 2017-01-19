@@ -4,29 +4,40 @@
 		    <div class="uk-width-1-3@m">
 	    		<div class="uk-card uk-card-default uk-background-cover" style="background-image: url('{!! asset('/uploads/'.$project->imageFilename) !!}');"></div>
 		    </div>
-		    <div class="uk-width-expand@m uk-margin-remove-top">
+		    <div class="uk-width-expand@m uk-margin-remove-top project-header">
 		    	<div class="uk-card uk-card-default uk-padding-small uk-background-secondary uk-light">
-			    	<a href="/project/{{ $project->id }}" class="uk-button uk-button-text"><h3 class="uk-margin-remove-bottom">{!! $project->name !!}</h3></a>
+		    		<div class="uk-margin-remove-bottom">
+			    		<a href="/project/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $project->name !!}</a>
+			    		@if (isset($group))
+			    			<span uk-icon="icon: chevron-right"></span>
+			    			<a href="/project/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">GROUPS</a>
+			    			<span uk-icon="icon: chevron-right"></span>
+			    			<a href="/group/{{ $group->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $group->name !!}</a>
+			    		@elseif (isset($team))
+			    			<span uk-icon="icon: chevron-right"></span>
+			    			<a href="/teams/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">TEAMS</a>
+			    			<span uk-icon="icon: chevron-right"></span>
+			    			<a href="/team/{{ $team->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $team->name !!}</a>
+			    		@endif
+			    		@if (isset($item))
+			    			<span uk-icon="icon: chevron-right"></span>
+			    			<a href="/item/{{ $item->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $item->title !!}</a>
+			    			<p>{!! $item->description !!}</p>
+			    		@endif
+			    	</div>
 			        <p>{!! $project->description !!}</p>
+			        
+			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
+					    <li class="uk-padding-remove-horizontal"><a href="/project/{{ $project->id }}">GROUPS</a></li>
+					    <li><a href="/tags/{{ $project->id }}">TAGS</a></li>
+					    <li><a href="/teams/{{ $project->id }}">TEAMS</a></li>
+					</ul>
+					
 			        <div uk-grid>
-					    <div class="uk-width-1-4@m">
-					    	<ul class="uk-nav-default uk-parent uk-nav-parent-icon" uk-nav>
-					        	<li class="uk-parent"><a href="#">EDIT</a>
-					        		<ul class="uk-nav-sub"><li class="uk-parent">
-					        			<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: pencil"></span> Edit project information</a></li>
-							        	<li><a href="/deleteProject/{{ $project->id }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Delete project</a></li>
-						        	</ul>
-					        	</li>
-					        </ul>
-					    	<ul class="uk-nav-default uk-parent uk-nav-parent-icon" uk-nav>
-					        	<li class="uk-parent"><a href="#">TEAMS</a>
-					        		<ul class="uk-nav-sub"><li class="uk-parent">
-					        			<li><a href="/teams/{{ $project->id }}">ALL TEAMS</a></li>
-							        	@foreach($teams as $team)
-							        		<li><a href="/team/{{ $team->id }}"><span class="uk-margin-small-right" uk-icon="icon: users"></span> {!! $team->name !!}</a></li>
-							        	@endforeach
-						        	</ul>
-					        	</li>
+					    <div class="uk-position-small uk-position-top-right">
+					    	<ul class="uk-iconnav">
+					        	<li><a href="" uk-icon="icon: pencil"></a></li>
+					        	<li><a href="" uk-icon="icon: trash"></a></li>
 					        </ul>
 				   		</div>
 					</div>
