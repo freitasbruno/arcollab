@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	
-	
+	<!--
 	<script>
 		(function ($) {
 		
@@ -75,5 +75,6 @@
 		
 		})(jQuery);
 	</script>
+	-->
 @stop
 

@@ -22,10 +22,10 @@
 			    		@if (isset($item))
 			    			<span uk-icon="icon: chevron-right"></span>
 			    			<a href="/item/{{ $item->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $item->title !!}</a>
-			    			<p>{!! $item->description !!}</p>
+			    		@else
+				    		<p>{!! $project->description !!}</p>
 			    		@endif
 			    	</div>
-			        <p>{!! $project->description !!}</p>
 			        
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
 					    <li class="uk-padding-remove-horizontal"><a href="/project/{{ $project->id }}">GROUPS</a></li>
@@ -37,7 +37,7 @@
 					    <div class="uk-position-small uk-position-top-right">
 					    	<ul class="uk-iconnav">
 					        	<li><a href="" uk-icon="icon: pencil"></a></li>
-					        	<li><a href="" uk-icon="icon: trash"></a></li>
+					        	<li><a href="/deleteProject/{!! $project->id !!}" uk-icon="icon: trash"></a></li>
 					        </ul>
 				   		</div>
 					</div>

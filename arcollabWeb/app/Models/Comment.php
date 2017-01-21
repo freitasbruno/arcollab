@@ -11,6 +11,11 @@ class Comment extends \NeoEloquent {
     {
         return $this->hasMany('Comment', 'HAS_COMMENT');
     }
+    
+    public function attachements()
+    {
+        return $this->hasMany('Attachement', 'HAS_ATTACHEMENT');
+    }
 }
 
 ?>

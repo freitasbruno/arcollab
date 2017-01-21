@@ -15,27 +15,13 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/uploader', function () {
-    return view('uploader');
-});
 
+Route::post('newProject', 'NewProjectController@create');
+Route::post('newComment', 'NewCommentController@create');
+Route::post('addUser', 'AddUserController@create');
+	
 Route::get('/home', function () {
     return view('home');
-});
-
-Route::get('upload', function() {
-  return ('image uploaded');
-});
-
-Route::post('/addUser', function () {
-	$email = Input::get('email');
-	$user = User::where('email', $email)->first();
-	$team = Team::find(Input::get('team_id'));
-	
-	$relation = $team->users()->save($user);
-	$users = $team->users;
-	
-    return Redirect::to('team/'.$team->id);
 });
 
 Route::get('/teams/{project_id}', function ($project_id) {
@@ -75,7 +61,7 @@ Route::post('/newTeam', function () {
 		return back();
 	}
 	
-    return Redirect::to($redirect);
+    return back();
 });
 
 Route::get('/deleteTeam/{id}', function ($id) {
@@ -109,8 +95,6 @@ Route::get('/project/{project_id}', function ($project_id) {
 	$teams = $project->teams;
 	return view("project", ['project' => $project, 'groups' => $groups, 'teams' => $teams]);
 });
-
-Route::post('newProject', 'UploadController@upload');
 
 Route::get('/deleteProject/{id}', function ($id) {
 	$project = Project::find($id);
@@ -191,7 +175,7 @@ Route::post('/newTag', function () {
 	$relation->createdBy = $user->id;
 	$relation->save();
 	
-    return Redirect::to($redirect);
+    return back();
 });
 
 Route::get('/deleteTag/{id}', function ($id) {
@@ -214,6 +198,7 @@ Route::get('/item/{item_id}', function ($item_id) {
 });
 
 Route::post('/newItem', function () {
+
 	$user = User::find(session()->get('user_id'));
 	
 	$group_id = Input::get('group_id');
@@ -238,8 +223,14 @@ Route::post('/newItem', function () {
 
 	$tags = $project->tags;
 	foreach($tags as $tag){
-		if(isset($_POST[$tag->name])){
+		if(isset($_POST[preg_replace('/\s+/', '_', $tag->name)])){
 			$relation = $item->tags()->save($tag);
+		}
+		$nestedTags = $tag->tags;
+		foreach($nestedTags as $nestedTag){
+			if(isset($_POST[preg_replace('/\s+/', '_', $nestedTag->name)])){
+				$relation = $item->tags()->save($nestedTag);
+			}
 		}
 	}
 	
@@ -252,23 +243,6 @@ Route::get('/deleteItem/{id}', function ($id) {
 	$item = Item::find($id);
 	$item->delete();
 	return back();
-});
-
-Route::post('/newComment', function () {
-	$user = User::find(session()->get('user_id'));
-	
-	$item_id = Input::get('item_id');
-	$item = Item::find($item_id);
-	
-	$comment = new Comment;
-	$comment->description = Input::get('comment');
-	$comment->createdBy = $user->id;
-	$comment->save();
-	
-	$relation = $item->comments()->save($comment);
-	$relation->save();
-	
-    return Redirect::to('item/'.$item_id);
 });
 
 Route::get('/about', function () {

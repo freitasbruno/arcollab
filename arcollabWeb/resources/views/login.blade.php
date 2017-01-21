@@ -8,7 +8,7 @@
 	<div class="uk-section uk-text-center">
     	<div class="uk-container">
 			<div class="uk-card uk-card-default uk-width-1-4@m uk-position-center">
-			    <div class="uk-card-header uk-card-secondary">
+			    <div class="uk-card-header uk-card-secondary uk-padding-small">
 			        <h3 class="uk-card-title">LOGIN</h3>
 			    </div>
 			    <div class="uk-card-body uk-padding-small">

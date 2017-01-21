@@ -17,6 +17,13 @@
 				            <ul class="uk-nav-sub">
 				            	@foreach ($teams as $team)
 									<li><label><input class="uk-checkbox" type="checkbox" name="{!! $team->name !!}">{!! $team->name !!}</label></li>
+									@if(count($team->teams) > 0)
+									<ul>
+										@foreach ($team->teams as $nestedTeam)
+											<li><label><input class="uk-checkbox" type="checkbox" name="{!! $nestedTeam->name !!}">{!! $nestedTeam->name !!}</label></li>
+										@endforeach
+									</ul>
+									@endif
 								@endforeach
 				            </ul>
 				        </li>
@@ -25,6 +32,13 @@
 				            <ul class="uk-nav-sub">
 				            	@foreach ($tags as $tag)
 									<li><label><input class="uk-checkbox" type="checkbox" name="{!! $tag->name !!}">{!! $tag->name !!}</label></li>
+									@if(count($tag->tags) > 0)
+									<ul>
+										@foreach ($tag->tags as $nestedTag)
+											<li><label><input class="uk-checkbox" type="checkbox" name="{!! $nestedTag->name !!}">{!! $nestedTag->name !!}</label></li>
+										@endforeach
+									</ul>
+									@endif
 								@endforeach
 				            </ul>
 				        </li>

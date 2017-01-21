@@ -217,6 +217,7 @@ return [
         'Comment' => App\Models\Comment::class,
         'Team' => App\Models\Team::class,
         'Tag' => App\Models\Tag::class,
+        'Attachement' => App\Models\Attachement::class,
         
         'Input' => Illuminate\Support\Facades\Input::class,
 

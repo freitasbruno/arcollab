@@ -8,9 +8,9 @@ use Redirect;
 use User;
 use Project;
 
-class UploadController extends Controller {
+class NewProjectController extends Controller {
 	
-	public function upload() {
+	public function create() {
 		$user = User::find(session()->get('user_id'));
 	
 		$project = new Project;
@@ -25,7 +25,7 @@ class UploadController extends Controller {
 		$file = array('image' => Input::file('image'));
 		
 		// setting up rules
-		$rules = array('image' => 'required'); //mimes:jpeg,bmp,png and for max size max:10000
+		$rules = array(); //mimes:jpeg,bmp,png and for max size max:10000
 		// doing the validation, passing post data, rules and the messages
 		$validator = Validator::make($file, $rules);
 		if ($validator->fails()) {
@@ -44,7 +44,7 @@ class UploadController extends Controller {
 				$project->imageFilename = $fileName;
 				$project->save();
 				
-				return Redirect::to('projects');
+				return back();
 			} else {
 				return Redirect::to('upload failed');
 			}

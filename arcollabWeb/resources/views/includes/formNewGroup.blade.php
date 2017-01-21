@@ -7,7 +7,11 @@
 		</div>
 		<div class="uk-margin-small-left uk-margin-small-right uk-card-body">
 			{!! Form::open(array('url' => 'newGroup', 'class' => 'uk-form')) !!}
-				{!! Form::hidden('project_id', $project->id) !!}
+				@if(isset($group))
+					{!! Form::hidden('group_id', $group->id) !!}
+				@else
+					{!! Form::hidden('project_id', $project->id) !!}
+				@endif
 				{!! Form::text('name', false, array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Group Name')) !!}
 				{!! Form::textarea('description', false, array('class' => 'uk-textarea uk-margin-small', 'placeholder' => 'Group Description', 'rows' => '2')) !!}
 				{!! Form::submit('Create', array('class' => 'uk-margin-small uk-button uk-width-1-1')) !!}
