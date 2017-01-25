@@ -8,7 +8,20 @@ These are some of the general steps taken in the development of this app. Serves
 
 - [ ] Models
 	- [ ] TagCategory
+
+- [x] Forms for creating
+	- [ ] 
+
+- [x] Views
+	- [ ] User Profile
+	- User Name
+	- Email 
+	- Phone
+	- Skype
+	- LinkedIn
+	- 
 	
+- [ ] Restrict ITEM visualization to the items shared with user
 - [ ] Managing user authentication and session through Auth
 - [ ] Form controlers and validation
 - [ ] Form validation with js (before submit)
@@ -35,7 +48,7 @@ These are some of the general steps taken in the development of this app. Serves
 	- [x] Tag
 	- [x] Comment
 	- [x] Attachment
-	- 
+	
 - [x] Forms for creating
 	- [x] User (Register Page)
 	- [x] Login
@@ -44,3 +57,13 @@ These are some of the general steps taken in the development of this app. Serves
 	- [x] Group
 	- [x] Tag
 	- [x] Comment
+
+- [x] Views
+	- [x] Login
+	- [x] Register
+	- [x] Teams
+	- [x] Projects
+	- [x] Project
+	- [x] Group
+	- [x] Tags
+	- [x] Item

@@ -20,9 +20,9 @@ sudo chmod g+w myfolder
 }
 ```
 
-* Add the service provider in config/app.php:
+* Add the service provider class in config/app.php:
 
-`'Vinelab\NeoEloquent\NeoEloquentServiceProvider',`
+`Vinelab\NeoEloquent\NeoEloquentServiceProvider::class,`
 
 * Run `composer update` 
 
@@ -42,25 +42,30 @@ sudo chmod g+w myfolder
 ]
 ```
 
-### MIGRATIONS
 
-* create the folder database/labels
-* modify composer.json and add "database/labels" to the classmap array
-* run composer dump-autoload
-
-### Models
+### MODELS
 
 * Create a app/Models folder > create a test model Node.php
 
 ```
-<?php
-
 namespace App\Models;
 
 class Node extends \NeoEloquent {
-}
+ 
+    protected $label = 'Node';
 
-?>
+    protected $fillable = ['name', 'email'];
+    
+    public function hasNode()
+    {
+        return $this->hasOne('Node', 'HAS ONE');
+    }
+
+	public function likes()
+	{
+		return $this->hasMany('Node', 'LIKES');
+    }
+}
 ```
 
 * Add the models aliases in config/app.php
@@ -68,4 +73,141 @@ class Node extends \NeoEloquent {
 ```
 'NeoEloquent' => \NeoEloquent::class,
 'Node' => App\Models\Node::class,
+```
+
+### BASIC TESTING
+
+Creating 5 sample nodes with a name property
+```
+Route::get('neoTestNodes', function () {
+	for($i=0; $i<5; $i++){
+		$node = new Node;
+	    $node->name = 'Test Node ' . $i;
+	    $node->save();
+	}
+});
+```
+
+Creating a Edge (relation) between two of the nodes
+(This assumes a fresh neo4j database, otherwise the id's will differ - Node::find(???))
+
+```
+Route::get('neoTestRelations', function () {
+
+	$node1 = Node::find(1);
+	$node2 = Node::find(2);
+	$relation = $node1->hasNode()->save($node2);
+	$relation->name = $node1->name . "-" . $node2->name;
+	$relation->save();
+});
+```
+
+
+```
+Route::get('neoTestModify', function () {
+	$node1 = Node::find(1);
+	$node2 = Node::find(3);
+	$node1->name = $node1->name . ' - modified';
+	$node1->save();
+	
+	$node2->name = $node2->name . ' - modified';
+	$node2->save();
+	
+	$relation = $node1->hasNode()->save($node2);
+	$relation->name = 'modified relation';
+	$relation->save();
+	
+	$node0 = Node::find(0);
+	$nodes = Node::all();
+    foreach($nodes as $node){
+    	if($node->id != 0){
+	    	$relation = $node0->likes()->save($node);
+			$relation->name = 'new like relation';
+			$relation->save();
+    	}
+    }
+});
+```
+
+### AUTHENTICATION
+
+To use the default builtin Laravel authentication, involved a bit of effort, but it turned out to work rather well.
+These are the steps I took to successfully configure everything.
+
+* Create the auth scaffolding `php artisan make:auth`
+	- This will create most of the structure including the login and register page, as well as a home page where you'll be redirected after a successfull login.
+* Update the User model as follows:
+ 	- The key here was using Contracts as User needs to extend NeoEloquent and not the default Authenticatable.
+ 	- Next I populated the various abstract methods of each of the Contracts used (Authenticatable & CanResetPassword)
+ 	- The `sendPasswordResetNotification` method still need to be implemented, to generate and send the Notification but returning null will prevent any errors for now.
+
+```
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\Authenticatable as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPassword;
+
+class User extends \NeoEloquent implements Authenticatable, CanResetPassword
+{
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+    
+    public function getAuthIdentifierName()
+	{
+	    return $this->email;
+	}
+	
+    public function getAuthIdentifier()
+	{
+	    return $this->id;
+	}
+	
+	public function getAuthPassword()
+	{
+	    return $this->password;
+	}
+	
+	public function getRememberToken()
+	{
+	    return $this->remember_token;
+	}
+	
+	public function setRememberToken($token)
+	{
+	    $this->remember_token = $token;
+	}
+	
+	public function getRememberTokenName()
+	{
+	    return 'remember_token';
+	}
+	
+	public function getEmailForPasswordReset()
+	{
+	    return $this->email;
+	}
+		
+	public function sendPasswordResetNotification($token)
+	{
+	    return null;
+	}
+}
 ```
