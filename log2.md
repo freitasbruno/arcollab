@@ -37,7 +37,7 @@ sudo chmod g+w myfolder
         'host'   => 'localhost',
         'port'   => '7474',
         'username' => 'neo4j',
-        'password' => 'j4oen'
+        'password' => 'neo4j'
     ]
 ]
 ```
@@ -77,7 +77,12 @@ class Node extends \NeoEloquent {
 
 ### BASIC TESTING
 
-Creating 5 sample nodes with a name property
+If Neo4j is running you can look inside your database going to `localhost:7474`.
+On the settings check the `Do no use Bolt` option and enter the credentials to connect (default user: 'neo4j', pass:'neo4j').
+Run simple Cypher query (`MATCH (n) RETURN n`) after visiting each of the routes below to see the nodes and relations being created.
+
+**Creating 5 sample nodes with a name property**
+
 ```
 Route::get('neoTestNodes', function () {
 	for($i=0; $i<5; $i++){
@@ -88,8 +93,8 @@ Route::get('neoTestNodes', function () {
 });
 ```
 
-Creating a Edge (relation) between two of the nodes
-(This assumes a fresh neo4j database, otherwise the id's will differ - Node::find(???))
+**Creating a Edge (relation) between two of the nodes**
+(This assumes a fresh neo4j database, otherwise the id's will differ - `Node::find(???)`)
 
 ```
 Route::get('neoTestRelations', function () {
@@ -102,6 +107,7 @@ Route::get('neoTestRelations', function () {
 });
 ```
 
+**Creating a Edges between one of the nodes and all the remainder and modifing Node and Edge properties**
 
 ```
 Route::get('neoTestModify', function () {
@@ -131,7 +137,7 @@ Route::get('neoTestModify', function () {
 
 ### AUTHENTICATION
 
-To use the default builtin Laravel authentication, involved a bit of effort, but it turned out to work rather well.
+To use the default builtin Laravel authentication, involved a bit of effort, but it turned out to be pretty simple in the end.
 These are the steps I took to successfully configure everything.
 
 * Create the auth scaffolding `php artisan make:auth`

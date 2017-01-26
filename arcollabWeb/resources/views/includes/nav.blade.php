@@ -9,7 +9,7 @@
         <ul class="uk-navbar-nav">
             <li><a href="/home">HOME</a></li>
             <li><a href="/about">ABOUT</a></li>
-        	@if(is_null(session()->get('user_id')))
+        	@if (Auth::guest())
         		<li><a href="/register">REGISTER</a></li>
         		<li><a href="/login">LOGIN</a></li>
             @else

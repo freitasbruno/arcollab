@@ -15,13 +15,58 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/about', function () {
+    return 'route to about page';
+});
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/register', function () {
+	return view('register');
+});
+
+Route::post('register', function () {
+	$user = new User;
+	$user->email = Input::get('email');
+	$user->name = Input::get('name');
+	$user->password = Hash::make(Input::get('password'));
+	$user->save();
+	
+	return view('login', array('theEmail' => $user->email));
+});
+
+Route::get('/login', function () {
+	$session_id = session()->get('user_id');
+	if (is_null($session_id)){
+		return view('login');
+	}else{
+		return view('projects');
+	}
+});
+
+Route::post('login', function () {
+
+	$credentials = Input::only('email', 'password');
+	$email = $credentials['email'];
+	$password = $credentials['password'];
+	$user = User::where('email', $credentials['email'])->first();
+	
+	if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect('projects');
+        }else{
+		return back();
+	}
+});
 
 Route::post('newProject', 'NewProjectController@create');
 Route::post('newComment', 'NewCommentController@create');
 Route::post('addUser', 'AddUserController@create');
-	
-Route::get('/home', function () {
-    return view('home');
+
+Route::get('/logout', function () {
+	session()->clear();
+	return view('home');
 });
 
 Route::get('/teams/{project_id}', function ($project_id) {
@@ -71,22 +116,18 @@ Route::get('/deleteTeam/{id}', function ($id) {
 });
 
 Route::get('/projects', function () {
-	if (is_null(session()->get('user_id'))){
-		return Redirect::to('login');
-	}else{
-		$user = User::find(session()->get('user_id'));
-		$projects = $user->hasProject;
-		
-		$sharedProjects = array();
-		$teams = $user->assignedTeams;
-		if (!empty($teams)){
-			foreach ($teams as $team){
-				$project = $team->parentProject;
-				array_push($sharedProjects, $project);
-			}
+	$user = Auth::user();
+	$projects = $user->hasProject;
+	
+	$sharedProjects = array();
+	$teams = $user->assignedTeams;
+	if (!empty($teams)){
+		foreach ($teams as $team){
+			$project = $team->parentProject;
+			array_push($sharedProjects, $project);
 		}
-		return view('projects', array('user'=>$user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
 	}
+	return view('projects', array('user'=>$user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
 });
 
 Route::get('/project/{project_id}', function ($project_id) {
@@ -243,102 +284,4 @@ Route::get('/deleteItem/{id}', function ($id) {
 	$item = Item::find($id);
 	$item->delete();
 	return back();
-});
-
-Route::get('/about', function () {
-    return 'route to about page';
-});
-
-Route::get('/register', function () {
-	return view('register');
-});
-
-Route::post('register', function () {
-	$user = new User;
-	$user->email = Input::get('email');
-	$user->name = Input::get('name');
-	$user->password = Hash::make(Input::get('password'));
-	$user->save();
-	
-	return view('login', array('theEmail' => $user->email));
-});
-
-Route::get('/login', function () {
-	$session_id = session()->get('user_id');
-	if (is_null($session_id)){
-		return view('login');
-	}else{
-		return view('projects');
-	}
-});
-
-Route::post('login', function () {
-	$credentials = Input::only('email', 'password');
-	$user = User::where('email', $credentials['email'])->first();
-	$password = $credentials['password'];
-	if(Hash::check($password, $user->password)) {
-		session()->put('user_id', $user->id);
-		return redirect('projects');
-	}else{
-		return ('no success');
-	}
-});
-
-Route::get('/logout', function () {
-	session()->clear();
-	return view('home');
-});
-
-Route::get('neoTestNodes', function () {
-	for($i=0; $i<5; $i++){
-		$node = new Node;
-	    $node->name = 'Test Node ' . $i;
-	    $node->save();
-	}
-});
-
-Route::get('neoTestRelations', function () {
-	/*
-	One-To-One
-	->hasOne()
-	<-belongsTo()
-	
-	One-To-Many
-	->hasMany()
-	<-belongsTo()
-	
-	Many-To-Many
-	->belongToMany()
-	
-	
-	*/
-	$node1 = Node::find(1);
-	$node2 = Node::find(2);
-	$relation = $node1->hasNode()->save($node2);
-	$relation->name = $node1->name . "-" . $node2->name;
-	$relation->save();
-});
-
-Route::get('neoTestModify', function () {
-	$node1 = Node::find(1);
-	$node2 = Node::find(3);
-	$node1->name = $node1->name . ' - modified';
-	$node1->save();
-	
-	$node2->name = $node2->name . ' - modified';
-	$node2->save();
-	
-	$relation = $node1->hasNode()->save($node2);
-	$relation->name = 'modified relation';
-	$relation->save();
-	
-	$node0 = Node::find(0);
-	$nodes = Node::all();
-    foreach($nodes as $node){
-    	if($node->id != 0){
-	    	$relation = $node0->likes()->save($node);
-			$relation->name = 'new like relation';
-			$relation->save();
-    	}
-    }
 });
