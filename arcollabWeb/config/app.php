@@ -149,7 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Watson\BootstrapForm\BootstrapFormServiceProvider::class,
-		
+
         /*
          * Application Service Providers...
          */
@@ -157,7 +157,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+
         Vinelab\NeoEloquent\NeoEloquentServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
     ],
@@ -208,7 +208,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
       	'Html' => Collective\Html\HtmlFacade::class,
       	'BootForm' => Watson\BootstrapForm\Facades\BootstrapForm::class,
-		
+
         'NeoEloquent' => \NeoEloquent::class,
         'User' => App\Models\User::class,
         'Project' => App\Models\Project::class,
@@ -216,9 +216,10 @@ return [
         'Item' => App\Models\Item::class,
         'Comment' => App\Models\Comment::class,
         'Team' => App\Models\Team::class,
+        'TagCategory' => App\Models\TagCategory::class,
         'Tag' => App\Models\Tag::class,
         'Attachement' => App\Models\Attachement::class,
-        
+
         'Input' => Illuminate\Support\Facades\Input::class,
 
     ],

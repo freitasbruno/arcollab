@@ -4,7 +4,7 @@
 	@include('includes/projectHeader')
 @stop
 
-@section('content') 
+@section('content')
 	<div class="uk-section uk-padding-remove-top">
 	    <div class="uk-container uk-container-medium">
 	    	<article class="uk-comment">
@@ -25,7 +25,7 @@
 			    </div>
 			</article>
 			<hr>
-	    	@include('includes/formNewComment')
+	    	@include('forms/formNewComment')
 			@each('includes/commentCard', $comments, 'comment')
 	    </div>
     </div>

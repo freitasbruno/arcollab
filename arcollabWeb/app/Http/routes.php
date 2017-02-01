@@ -33,7 +33,7 @@ Route::post('register', function () {
 	$user->name = Input::get('name');
 	$user->password = Hash::make(Input::get('password'));
 	$user->save();
-	
+
 	return view('login', array('theEmail' => $user->email));
 });
 
@@ -52,7 +52,7 @@ Route::post('login', function () {
 	$email = $credentials['email'];
 	$password = $credentials['password'];
 	$user = User::where('email', $credentials['email'])->first();
-	
+
 	if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect('projects');
         }else{
@@ -84,11 +84,11 @@ Route::get('/team/{team_id}', function ($team_id) {
 
 Route::post('/newTeam', function () {
 	$user = User::find(session()->get('user_id'));
-	
+
 	$team = new Team;
 	$team->name = Input::get('name');
 	$team->save();
-	
+
 	if (!empty(Input::get('project_id'))){
 	    $project_id = Input::get('project_id');
 	    $project = Project::find($project_id);
@@ -105,7 +105,7 @@ Route::post('/newTeam', function () {
 		$relation->save();
 		return back();
 	}
-	
+
     return back();
 });
 
@@ -118,7 +118,7 @@ Route::get('/deleteTeam/{id}', function ($id) {
 Route::get('/projects', function () {
 	$user = Auth::user();
 	$projects = $user->hasProject;
-	
+
 	$sharedProjects = array();
 	$teams = $user->assignedTeams;
 	if (!empty($teams)){
@@ -143,23 +143,24 @@ Route::get('/deleteProject/{id}', function ($id) {
     return Redirect::to('projects');
 });
 
+
 Route::get('/group/{group_id}', function ($group_id) {
 	$group = Group::find($group_id);
 	$items = $group->items;
 	$groups = $group->groups;
 	$project = parentProject($group_id);
 	$teams = $project->teams;
-	$tags = $project->tags;
-	return view("group", ['group' => $group, 'project' => $project, 'items' => $items, 'groups' => $groups, 'teams' => $teams, 'tags' => $tags]);
+	$tagCategories = $project->tags;
+	return view("group", ['group' => $group, 'project' => $project, 'items' => $items, 'groups' => $groups, 'teams' => $teams, 'tagCategories' => $tagCategories]);
 });
 
 Route::post('/newGroup', function () {
 	$user = User::find(session()->get('user_id'));
-	
+
 	$group = new Group;
 	$group->name = Input::get('name');
 	$group->save();
-	
+
 	if (!empty(Input::get('project_id'))){
 	    $project_id = Input::get('project_id');
 	    $project = Project::find($project_id);
@@ -175,7 +176,7 @@ Route::post('/newGroup', function () {
 	}
 	$relation->createdBy = $user->id;
 	$relation->save();
-	
+
     return Redirect::to($redirect);
 });
 
@@ -189,8 +190,29 @@ Route::get('/deleteGroup/{id}', function ($id) {
 
 Route::get('/tags/{project_id}', function ($project_id) {
 		$project = Project::find($project_id);
-		$tags = $project->tags;
-		return view('tags', array('project'=>$project, 'tags'=>$tags));
+		$tagCategories = $project->tagCategories;
+		return view('tags', array('project'=>$project, 'tagCategories'=>$tagCategories));
+});
+
+Route::post('/newTagCategory', function () {
+	$user = User::find(session()->get('user_id'));
+
+	$tagCategory = new TagCategory;
+	$tagCategory->name = Input::get('name');
+	$tagCategory->save();
+
+	if (!empty(Input::get('project_id'))){
+        $project_id = Input::get('project_id');
+        $project = Project::find($project_id);
+        $relation = $project->tagCategories()->save($tagCategory);
+        $redirect = 'tags/'.$project_id;
+	}else{
+	    return back();
+	}
+	$relation->createdBy = $user->id;
+	$relation->save();
+
+    return back();
 });
 
 Route::post('/newTag', function () {
@@ -199,13 +221,8 @@ Route::post('/newTag', function () {
 	$tag = new Tag;
 	$tag->name = Input::get('name');
 	$tag->save();
-	
-	if (!empty(Input::get('project_id'))){
-	    $project_id = Input::get('project_id');
-	    $project = Project::find($project_id);
-	    $relation = $project->tags()->save($tag);
-	    $redirect = 'tags/'.$project_id;
-	}elseif (!empty(Input::get('tag_id'))){
+
+	if (!empty(Input::get('tag_id'))){
 	    $parentTag_id = Input::get('tag_id');
 	    $parentTag = Tag::find($parentTag_id);
 	    $relation = $parentTag->Tags()->save($tag);
@@ -215,7 +232,7 @@ Route::post('/newTag', function () {
 	}
 	$relation->createdBy = $user->id;
 	$relation->save();
-	
+
     return back();
 });
 
@@ -234,27 +251,27 @@ Route::get('/item/{item_id}', function ($item_id) {
 	$groups = $group->groups;
 	$items = $group->items;
 	$project = itemParentProject($item_id);
-	
+
 	return view("item", ['item' => $item, 'items' => $items, 'comments' => $comments, 'project' => $project, 'group' => $group, 'groups' => $groups]);
 });
 
 Route::post('/newItem', function () {
 
 	$user = User::find(session()->get('user_id'));
-	
+
 	$group_id = Input::get('group_id');
 	$group = Group::find($group_id);
 	$project = parentProject($group_id);
-	
+
 	$item = new Item;
 	$item->title = Input::get('title');
 	$item->description = Input::get('description');
 	$item->save();
-	
+
 	$relation = $group->items()->save($item);
 	$relation->createdBy = $user->id;
 	$relation->save();
-	
+
 	$teams = $project->teams;
 	foreach($teams as $team){
 		if(isset($_POST[$team->name])){
@@ -262,19 +279,16 @@ Route::post('/newItem', function () {
 		}
 	}
 
-	$tags = $project->tags;
-	foreach($tags as $tag){
-		if(isset($_POST[preg_replace('/\s+/', '_', $tag->name)])){
-			$relation = $item->tags()->save($tag);
-		}
-		$nestedTags = $tag->tags;
-		foreach($nestedTags as $nestedTag){
-			if(isset($_POST[preg_replace('/\s+/', '_', $nestedTag->name)])){
-				$relation = $item->tags()->save($nestedTag);
+	$tagCategories = $project->tagCategories;
+	foreach($tagCategories as $tagCategory){
+		$tags = $tagCategory->tags;
+		foreach($nestedTags as $tag){
+			if(isset($_POST[preg_replace('/\s+/', '_', $tag->name)])){
+				$relation = $item->tags()->save($tag);
 			}
 		}
 	}
-	
+
     return Redirect::to('group/'.$group_id);
 });
 

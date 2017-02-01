@@ -22,7 +22,7 @@ $nestedTags = $tag->tags;
 							    <li>
 									<table class="uk-table uk-table-hover uk-table-middle">
 								        <tbody>
-								        	@include('includes/formNewTag')	
+								        	@include('forms/formNewTag')	
 								        	@if(count($nestedTags) >= 1)
 												@foreach ($nestedTags as $nestedTag)
 										            <tr>

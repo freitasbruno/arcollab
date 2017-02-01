@@ -41,7 +41,7 @@ $comments = $item->comments;
 							    <li>
 									<table class="uk-table uk-table-hover uk-table-middle">
 								        <tbody>
-								        	@include('includes/formNewComment')
+								        	@include('forms/formNewComment')
 								        	@if(count($comments) >= 1)
 												@foreach ($comments as $comment)
 										            <tr>
@@ -51,7 +51,7 @@ $comments = $item->comments;
 												@endforeach
 											@endif
 								        </tbody>
-								    </table>			    	
+								    </table>
 							    </li>
 							</ul>
 				        </div>

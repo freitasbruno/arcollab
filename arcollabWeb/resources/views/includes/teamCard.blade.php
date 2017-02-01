@@ -25,12 +25,12 @@ $users = $team->users;
 				                <td><span uk-icon="icon: users"></span></td>
 				                <td class="uk-table-link uk-text-left"><a class="uk-link-reset" href="/group/{{ $childTeam->id }}">{!! $childTeam->name !!}</a></td>
 				            </tr>
-						@endforeach	            
+						@endforeach
 				    </tbody>
 				</table>
 			</div>
 			@endif
-			
+
 			@if(count($users) >= 1)
 			<div class="uk-overflow-auto">
 			    <table class="uk-table uk-table-hover uk-table-middle">
@@ -42,14 +42,14 @@ $users = $team->users;
 				                    <a class="uk-link-reset" href="#">{!! $user->name !!}</a>
 				                </td>
 				            </tr>
-						@endforeach	            
+						@endforeach
 			        </tbody>
 			    </table>
 			</div>
 			@endif
-			@include('includes/formAddTeamUser')
+			@include('forms/formAddTeamUser')
 		</div>
-		<div class="uk-card-footer uk-padding-small">	
+		<div class="uk-card-footer uk-padding-small">
 			<p class="uk-padding-remove-vertical">
 				<span class="uk-badge uk-margin-right">{{ count($users) }}</span>Users
 			</p>
