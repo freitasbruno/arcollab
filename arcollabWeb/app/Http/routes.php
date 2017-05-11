@@ -150,7 +150,7 @@ Route::get('/group/{group_id}', function ($group_id) {
 	$groups = $group->groups;
 	$project = parentProject($group_id);
 	$teams = $project->teams;
-	$tagCategories = $project->tags;
+	$tagCategories = $project->tagCategories;
 	return view("group", ['group' => $group, 'project' => $project, 'items' => $items, 'groups' => $groups, 'teams' => $teams, 'tagCategories' => $tagCategories]);
 });
 
@@ -209,7 +209,7 @@ Route::post('/newTagCategory', function () {
 	}else{
 	    return back();
 	}
-	$relation->createdBy = $user->id;
+	//$relation->createdBy = $user->id;
 	$relation->save();
 
     return back();
@@ -217,21 +217,18 @@ Route::post('/newTagCategory', function () {
 
 Route::post('/newTag', function () {
 	$user = User::find(session()->get('user_id'));
-
+	
 	$tag = new Tag;
 	$tag->name = Input::get('name');
 	$tag->save();
 
-	if (!empty(Input::get('tag_id'))){
-	    $parentTag_id = Input::get('tag_id');
-	    $parentTag = Tag::find($parentTag_id);
-	    $relation = $parentTag->Tags()->save($tag);
-	    $redirect = 'tag/'.$parentTag_id;
-	}else{
-	    return back();
+	if (!empty(Input::get('tagCategory_id'))){
+	    $tagCategory_id = Input::get('tagCategory_id');
+	    $tagCategory = TagCategory::find($tagCategory_id);
+	    $relation = $tagCategory->tags()->save($tag);
+	    //$relation->createdBy = $user->id;
+		$relation->save();
 	}
-	$relation->createdBy = $user->id;
-	$relation->save();
 
     return back();
 });

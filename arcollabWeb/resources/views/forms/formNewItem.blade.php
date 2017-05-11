@@ -31,11 +31,11 @@
 				            <a href="#"><span uk-icon="icon: tag"></span> ADD TAGS</a>
 				            <ul class="uk-nav-sub">
 				            	@foreach ($tagCategories as $tagCategory)
-									<li><label><input class="uk-checkbox" type="checkbox" name="{!! $tag->name !!}">{!! $tagCategory->name !!}</label></li>
+									<li><label><input class="uk-checkbox" type="checkbox" name="{!! $tagCategory->name !!}">{!! $tagCategory->name !!}</label></li>
 									@if(count($tagCategory->tags) > 0)
 									<ul>
 										@foreach ($tagCategory->tags as $tag)
-											<li><label><input class="uk-checkbox" type="checkbox" name="{!! $nestedTag->name !!}">{!! $tag->name !!}</label></li>
+											<li><label><input class="uk-checkbox" type="checkbox" name="{!! $tag->name !!}">{!! $tag->name !!}</label></li>
 										@endforeach
 									</ul>
 									@endif

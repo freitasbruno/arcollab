@@ -2,8 +2,8 @@
 	{!! Form::open(array('url' => 'newTag', 'class' => 'uk-form')) !!}
 		@if (isset($project))
 			{!! Form::hidden('project_id', $project->id) !!}
-		@elseif (isset($tag))
-			{!! Form::hidden('tag_id', $tag->id) !!}
+		@elseif (isset($tagCategory))
+			{!! Form::hidden('tagCategory_id', $tagCategory->id) !!}
 		@endif
 		{!! Form::text('name', null, array('class' => 'uk-input', 'placeholder' => 'Tag name')) !!}
 		{!! Form::submit('CREATE', array('class' => 'uk-button uk-width-1-1')) !!}

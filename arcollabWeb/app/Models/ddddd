@@ -1,0 +1,23 @@
+[
+	{"id":2,"id_parent":1,"name":"ARCHITECTURE","deleted_at":null,"created_at":"2017-02-08 22:42:21","updated_at":"2017-02-08 22:42:21"},
+	{"id":3,"id_parent":1,"name":"CONTACTS","deleted_at":null,"created_at":"2017-02-08 22:42:31","updated_at":"2017-02-08 22:42:31"},
+	{"id":4,"id_parent":1,"name":"STUDY","deleted_at":null,"created_at":"2017-02-08 22:42:39","updated_at":"2017-02-08 22:42:39"},
+	[
+		{"id":6,"id_parent":2,"name":"HOUSE PINHEIRO","deleted_at":null,"created_at":"2017-02-08 22:54:17","updated_at":"2017-02-08 22:54:17"},
+		{"id":7,"id_parent":2,"name":"PROJECTS","deleted_at":null,"created_at":"2017-02-10 01:37:36","updated_at":"2017-02-10 01:37:36"},
+		{"id":8,"id_parent":2,"name":"TOKEN","deleted_at":null,"created_at":"2017-02-10 01:39:57","updated_at":"2017-02-10 01:39:57"},
+		[],
+		[],
+		[]
+	],
+	[
+		{"id":9,"id_parent":3,"name":"FRIENDS","deleted_at":null,"created_at":"2017-02-11 23:41:09","updated_at":"2017-02-11 23:41:09"},
+		{"id":10,"id_parent":3,"name":"FAMILY","deleted_at":null,"created_at":"2017-02-11 23:41:25","updated_at":"2017-02-11 23:41:25"},
+		[],
+		[]
+	],
+	[
+		{"id":11,"id_parent":4,"name":"ISCTE","deleted_at":null,"created_at":"2017-02-11 23:41:39","updated_at":"2017-02-11 23:41:39"},
+		[]
+	]
+]
