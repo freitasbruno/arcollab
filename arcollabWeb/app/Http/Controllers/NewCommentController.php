@@ -11,12 +11,13 @@ use User;
 use Item;
 use Comment;
 use Attachement;
+use Auth;
 
 class NewCommentController extends Controller {
 	
   public function create() {
     
-	$user = User::find(session()->get('user_id'));
+	$user = Auth::user();
 	
 	$item_id = Input::get('item_id');
 	$item = Item::find($item_id);

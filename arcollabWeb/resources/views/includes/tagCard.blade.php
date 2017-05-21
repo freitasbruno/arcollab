@@ -1,21 +1,21 @@
 <?php
-$tags = $tagCategory->tags;
+$tags = $parentTag->tags;
 ?>
 
 <div>
 	<div class="uk-card uk-card-default uk-card-hover">
 		<div class="uk-position-small uk-position-right uk-light">
-			<a href="/deleteTag/{{ $tagCategory->id }}" uk-icon="icon: close; ratio: 0.8"></a>
+			<a href="/deleteTag/{{ $parentTag->id }}" uk-icon="icon: close; ratio: 0.8"></a>
 		</div>
 		<div class="uk-card-secondary uk-card-header uk-padding-small tagColor">
 			<h5 class="uk-margin-remove-bottom">
-				<span class="uk-margin-right" uk-icon="icon: tag;"></span><span class="uk-text-bottom">{{ $tagCategory->name }}</span>
+				<span class="uk-margin-right" uk-icon="icon: tag;"></span><span class="uk-text-bottom">{{ $parentTag->name }}</span>
 			</h5>
 		</div>
 		<div class="uk-card-body uk-padding-remove">
 			<div class="uk-overflow-auto">
-	        	<ul uk-accordion>
-				    <li>
+	        	<ul uk-accordion >
+				    <li class="uk-open">
 				        <h4 class="uk-accordion-title uk-padding-small">{!! count($tags) !!} tags</h4>
 				        <div class="uk-accordion-content uk-margin-remove">
 				        	<ul class="uk-list">
@@ -26,8 +26,13 @@ $tags = $tagCategory->tags;
 								        	@if(count($tags) >= 1)
 												@foreach ($tags as $tag)
 										            <tr>
-										                <td><span uk-icon="icon: label"></span></td>
-										                <td>{!! $tag->name !!}</td>
+										                <td>
+										                	<span uk-icon="icon:tag"></span>
+										                	{!! $tag->name !!}
+										                </td>
+										                <td class="uk-table-shrink">
+															<a href="/deleteTag/{{ $tag->id }}" uk-icon="icon: close; ratio: 0.8"></a>
+														</td>
 										            </tr>
 												@endforeach
 											@endif

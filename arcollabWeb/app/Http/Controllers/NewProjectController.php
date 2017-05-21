@@ -7,19 +7,21 @@ use Validator;
 use Redirect;
 use User;
 use Project;
+use Illuminate\Support\Facades\Auth;
 
 class NewProjectController extends Controller {
 	
 	public function create() {
-		$user = User::find(session()->get('user_id'));
-	
+		//$user = User::find(session()->get('user_id'));
+		//$user = Auth::user();
+		
 		$project = new Project;
 		$project->name = Input::get('name');
 		$project->description = Input::get('description');
-		//$project->save();
+		$project->save();
 		
-		$relation = $user->hasProject()->save($project);
-		//$relation->save();
+		$relation = $user->projects()->save($project);
+		$relation->save();
 		
 		// getting all of the post data
 		$file = array('image' => Input::file('image'));

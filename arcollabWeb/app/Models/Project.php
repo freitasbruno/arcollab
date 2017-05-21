@@ -17,9 +17,9 @@ class Project extends \NeoEloquent {
         return $this->hasMany('Team', 'ASSIGNED_TO_TEAM');
     }
 
-    public function tagCategories()
+    public function tags()
     {
-        return $this->hasMany('TagCategory', 'HAS_TAG');
+        return $this->hasMany('Tag', 'HAS_TAG');
     }
 
 }

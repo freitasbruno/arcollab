@@ -29,7 +29,7 @@ class User extends NeoEloquent implements Authenticatable, CanResetPassword
         'password', 'remember_token',
     ];
     
-    public function hasProject()
+    public function projects()
     {
         return $this->hasMany('Project', 'CREATED_PROJECT');
     }

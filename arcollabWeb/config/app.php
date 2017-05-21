@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -216,7 +216,6 @@ return [
         'Item' => App\Models\Item::class,
         'Comment' => App\Models\Comment::class,
         'Team' => App\Models\Team::class,
-        'TagCategory' => App\Models\TagCategory::class,
         'Tag' => App\Models\Tag::class,
         'Attachement' => App\Models\Attachement::class,
 

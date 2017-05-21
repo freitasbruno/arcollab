@@ -7,9 +7,9 @@ class Tag extends \NeoEloquent {
     protected $label = 'Tag';
     protected $fillable = ['name'];
 
-    public function groups()
+    public function projects()
     {
-        return $this->hasMany('Group', 'HAS_TAG');
+        return $this->hasMany('Project', 'HAS_TAG');
     }
 
     public function items()
@@ -17,9 +17,9 @@ class Tag extends \NeoEloquent {
         return $this->hasMany('Item', 'HAS_TAG');
     }
 
-    public function tagCategory()
+    public function tags()
     {
-        return $this->belongsTo('TagCategory', 'HAS_TAG');
+        return $this->hasMany('Tag', 'HAS_TAG');
     }
 }
 
