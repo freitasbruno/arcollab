@@ -2,17 +2,21 @@
 
 [Back to arcollab Logs](/README.md)
 
-These are some of the general steps taken in the development of this app. Serves also has a roadmap for future development, noting some of tasks that have been skipped to accellarate the creation of the working prototype.
+These are some of the general steps taken in the development of this app. Serves also has a roadmap for future development, noting some of tasks that have been skipped to accelerate the creation of the working prototype.
 
 ### To Do:
 
-- [ ] Models
-	- [ ] TagCategory
+- Models
+	- [ ] Transmittal (Documents)
 	- [ ] Board (Kanban)
 	- [ ] Panel (Kanban)
 	- [ ] Profile (Stores user information and settings)
 
-- [x] Views
+- Views
+	- [ ] HOME VIEW (Projects)
+		  If User has projects, present them
+		  Else show welcome screen with instructions
+
 	- [ ] Board (Kanban)
 	- [ ] User Profile
 		- User Name
