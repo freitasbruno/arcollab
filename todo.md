@@ -16,6 +16,9 @@ These are some of the general steps taken in the development of this app. Serves
 	- [ ] HOME VIEW (Projects)
 		  If User has projects, present them
 		  Else show welcome screen with instructions
+	PROJECT CARD
+	- [ ] Tile the projects horizontally keeping center alignment
+	- [ ] Labels display Nos Teams and Issues
 
 	- [ ] Board (Kanban)
 	- [ ] User Profile

@@ -1,5 +1,5 @@
 <div>
-	<div class="uk-card uk-card-default uk-card-hover">
+	<div class="uk-card uk-card-default uk-card-hover uk-width-1-2@s uk-width-1-3@m uk-align-center uk-margin-large-top">
 		<a href="/project/{{ $project->id }}">
 			<div class="uk-card-header project-icon-heading uk-background-cover" style="background-image: url('{!! asset('/uploads/'.$project->imageFilename) !!}');"></div>
 		</a>
@@ -8,7 +8,7 @@
 				<h4 class="uk-margin-remove-bottom" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ $project->name }}</h4>
 			</a>
 		</div>
-		<div class="uk-card-footer uk-padding-small">	
+		<div class="uk-card-footer uk-padding-small">
 			<p class="uk-padding-remove-vertical">
 				<span class="uk-badge uk-margin-right">{{ countProjectGroups($project) }}</span>Project Groups
 				<br>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -7,25 +7,22 @@ use Validator;
 use Redirect;
 use User;
 use Project;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class NewProjectController extends Controller {
-	
+
 	public function create() {
-		//$user = User::find(session()->get('user_id'));
-		//$user = Auth::user();
-		
+		$user = Auth::user();
 		$project = new Project;
 		$project->name = Input::get('name');
 		$project->description = Input::get('description');
 		$project->save();
-		
+
 		$relation = $user->projects()->save($project);
 		$relation->save();
-		
 		// getting all of the post data
 		$file = array('image' => Input::file('image'));
-		
+
 		// setting up rules
 		$rules = array(); //mimes:jpeg,bmp,png and for max size max:10000
 		// doing the validation, passing post data, rules and the messages
@@ -40,12 +37,13 @@ class NewProjectController extends Controller {
 				$extension = Input::file('image')->getClientOriginalExtension();
 				$name = Input::file('image')->getClientOriginalName();
 				$fileName = 'project'.$project->id.'.'.$extension;
+
 				Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-				
+
 				$project->imageName = $name;
 				$project->imageFilename = $fileName;
 				$project->save();
-				
+
 				return back();
 			} else {
 				return Redirect::to('upload failed');
