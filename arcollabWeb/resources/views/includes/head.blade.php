@@ -6,14 +6,15 @@
     <meta name="author" content="Bruno Freitas">
 
     <title>ARCOLLAB</title>
-    
+
     <!-- css -->
     {!! Html::style('css/uikit.min.css') !!}
     {!! Html::style('css/style.css') !!}
-	
+
     <!-- js -->
     {!! Html::script('js/jquery.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/uikit.min.js') !!}
-    
+    {!! Html::script('js/uikit-icons.min.js') !!}
+
 </head>

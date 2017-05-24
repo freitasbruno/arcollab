@@ -12,6 +12,11 @@ class Project extends \NeoEloquent {
         return $this->hasMany('Group', 'HAS_GROUP');
     }
 
+    public function items()
+    {
+        return $this->hasMany('Item', 'HAS_ITEM');
+    }
+
     public function teams()
     {
         return $this->hasMany('Team', 'ASSIGNED_TO_TEAM');

@@ -61,10 +61,16 @@ Route::post('login', function () {
 	}
 });
 
-Route::post('newProject', 'NewProjectController@create');
+Route::post('newProject', 'ProjectController@create');
 Route::post('newComment', 'NewCommentController@create');
 Route::post('addUser', 'AddUserController@create');
 
+Route::resource('projects', 'ProjectController');
+/*
+Route::get('projects', 'ProjectController@all');
+Route::get('project/{project_id}', 'ProjectController@show');
+Route::get('deleteProject/{id}', 'ProjectController@delete');
+*/
 Route::get('/logout', function () {
 	session()->clear();
 	return view('home');
@@ -116,35 +122,7 @@ Route::get('/deleteTeam/{id}', function ($id) {
 	return back();
 });
 
-Route::get('/projects', function () {
-	$user = Auth::user();
-	$projects = $user->projects;
-
-	$sharedProjects = array();
-	$teams = $user->assignedTeams;
-	if (!empty($teams)){
-		foreach ($teams as $team){
-			$project = $team->parentProject;
-			array_push($sharedProjects, $project);
-		}
-	}
-	return view('projects', array('user'=>$user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
-});
-
-Route::get('/project/{project_id}', function ($project_id) {
-	$project = Project::find($project_id);
-	$groups = $project->groups;
-	$teams = $project->teams;
-	return view("project", ['project' => $project, 'groups' => $groups, 'teams' => $teams]);
-});
-
-Route::get('/deleteProject/{id}', function ($id) {
-	$project = Project::find($id);
-	$project->delete();
-    return Redirect::to('projects');
-});
-
-
+/*
 Route::get('/group/{group_id}', function ($group_id) {
 	$group = Group::find($group_id);
 	$items = $group->items;
@@ -157,7 +135,7 @@ Route::get('/group/{group_id}', function ($group_id) {
 
 Route::post('/newGroup', function () {
 	$user = Auth::user();
-	
+
 	$group = new Group;
 	$group->name = Input::get('name');
 	$group->save();
@@ -188,6 +166,7 @@ Route::get('/deleteGroup/{id}', function ($id) {
 	$group->delete();
 	return back();
 });
+*/
 
 Route::get('/tags/{project_id}', function ($project_id) {
 		$project = Project::find($project_id);

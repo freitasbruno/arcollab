@@ -8,12 +8,7 @@
 		    	<div class="uk-card uk-card-default uk-padding-small uk-background-secondary uk-light">
 		    		<div class="uk-margin-remove-bottom">
 			    		<a href="/project/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $project->name !!}</a>
-			    		@if (isset($group))
-			    			<span uk-icon="icon: chevron-right"></span>
-			    			<a href="/project/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">GROUPS</a>
-			    			<span uk-icon="icon: chevron-right"></span>
-			    			<a href="/group/{{ $group->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $group->name !!}</a>
-			    		@elseif (isset($team))
+			    		@if (isset($team))
 			    			<span uk-icon="icon: chevron-right"></span>
 			    			<a href="/teams/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">TEAMS</a>
 			    			<span uk-icon="icon: chevron-right"></span>
@@ -26,13 +21,13 @@
 				    		<p>{!! $project->description !!}</p>
 			    		@endif
 			    	</div>
-			        
+
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
-					    <li class="uk-padding-remove-horizontal"><a href="/project/{{ $project->id }}">GROUPS</a></li>
+					    <li class="uk-padding-remove-horizontal"><a href="/project/{{ $project->id }}">ISSUES</a></li>
 					    <li><a href="/tags/{{ $project->id }}">TAGS</a></li>
 					    <li><a href="/teams/{{ $project->id }}">TEAMS</a></li>
 					</ul>
-					
+
 			        <div uk-grid>
 					    <div class="uk-position-small uk-position-top-right">
 					    	<ul class="uk-iconnav">
