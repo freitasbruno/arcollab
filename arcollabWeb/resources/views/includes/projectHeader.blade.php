@@ -7,7 +7,7 @@
 		    <div class="uk-width-expand@m uk-margin-remove-top project-header">
 		    	<div class="uk-card uk-card-default uk-padding-small uk-background-secondary uk-light">
 		    		<div class="uk-margin-remove-bottom">
-			    		<a href="/project/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $project->name !!}</a>
+			    		<a href="/projects/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">{!! $project->name !!}</a>
 			    		@if (isset($team))
 			    			<span uk-icon="icon: chevron-right"></span>
 			    			<a href="/teams/{{ $project->id }}" class="uk-button uk-button-text uk-text-uppercase uk-text-large">TEAMS</a>
@@ -23,7 +23,7 @@
 			    	</div>
 
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
-					    <li class="uk-padding-remove-horizontal"><a href="/project/{{ $project->id }}">ISSUES</a></li>
+					    <li class="uk-padding-remove-horizontal"><a href="/projects/{{ $project->id }}">ISSUES</a></li>
 					    <li><a href="/tags/{{ $project->id }}">TAGS</a></li>
 					    <li><a href="/teams/{{ $project->id }}">TEAMS</a></li>
 					</ul>
@@ -32,7 +32,7 @@
 					    <div class="uk-position-small uk-position-top-right">
 					    	<ul class="uk-iconnav">
 					        	<li><a href="" uk-icon="icon: pencil"></a></li>
-					        	<li><a href="/deleteProject/{!! $project->id !!}" uk-icon="icon: trash"></a></li>
+					        	<li><a href="{{ route('project.delete', $project->id) }}" uk-icon="icon: trash"></a></li>
 					        </ul>
 				   		</div>
 					</div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Input;
 use Validator;
@@ -18,6 +17,21 @@ use Auth;
 
 class ProjectController extends Controller
 {
+    /**
+     * The user repository instance.
+     */
+    protected $user;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  User  $user
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->user = Auth::user();
+    }
 
     /**
      * Display a listing of the resource.
@@ -26,18 +40,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-
-        $user = Auth::user();
-        $projects = $user->projects;
+        $projects = $this->user->projects;
 		$sharedProjects = array();
-		$teams = $user->assignedTeams;
+		$teams = $this->user->assignedTeams;
 		if (!empty($teams)){
 			foreach ($teams as $team){
 				$project = $team->parentProject;
 				array_push($sharedProjects, $project);
 			}
 		}
-		return view('projects', array('user'=>$user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
+		return view('projects', array('user'=>$this->user, 'projects'=>$projects, 'sharedProjects'=>$sharedProjects));
     }
 
     /**
@@ -48,43 +60,6 @@ class ProjectController extends Controller
     public function create()
     {
 
-        $user = Auth::user();
-        $project = new Project;
-		$project->name = Input::get('name');
-		$project->description = Input::get('description');
-		$project->save();
-
-		$relation = $user->projects()->save($project);
-		$relation->save();
-		// getting all of the post data
-		$file = array('image' => Input::file('image'));
-
-		// setting up rules
-		$rules = array(); //mimes:jpeg,bmp,png and for max size max:10000
-		// doing the validation, passing post data, rules and the messages
-		$validator = Validator::make($file, $rules);
-		if ($validator->fails()) {
-			// send back to the page with the input data and errors
-			return 'validator failed';
-		} else {
-			// checking file is valid.
-			if (Input::file('image')->isValid()) {
-				$destinationPath = 'uploads';
-				$extension = Input::file('image')->getClientOriginalExtension();
-				$name = Input::file('image')->getClientOriginalName();
-				$fileName = 'project'.$project->id.'.'.$extension;
-
-				Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-
-				$project->imageName = $name;
-				$project->imageFilename = $fileName;
-				$project->save();
-
-				return back();
-			} else {
-				return Redirect::to('upload failed');
-			}
-		}
     }
 
     /**
@@ -95,7 +70,46 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Creating the project and saving the relation to the user
+        $project = new Project;
+		$project->name = $request->input('name');
+		$project->description = $request->input('description');
+		$project->save();
+
+		$relation = $user->projects()->save($project);
+		$relation->save();
+
+        if ($request->hasFile('image')) {
+            if ($request->file('image')->isValid()) {
+                $file = $request->file('image');
+
+                /*
+                $rules = array(); //mimes:jpeg,bmp,png and for max size max:10000
+                $validator = Validator::make($file, $rules);
+
+                if ($validator->fails()) {
+                    // send back to the page with the input data and errors
+                    return 'validator failed';
+                }
+                */
+
+                $destinationPath = 'uploads';
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $name = $request->file('image')->getClientOriginalName();
+                $fileName = 'project'.$project->id.'.'.$extension;
+
+                $file->move($destinationPath, $fileName);
+
+                $project->imageName = $name;
+                $project->imageFilename = $fileName;
+                $project->save();
+
+            }
+        }else{
+            return ('Image not valid');
+        }
+        return back();
     }
 
     /**

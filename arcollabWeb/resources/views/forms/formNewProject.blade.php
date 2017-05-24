@@ -1,5 +1,5 @@
 <div>
-	{!! Form::open(array('url' => 'newProject', 'files'=>true, 'class' => 'uk-form', 'id' => 'newProjectForm')) !!}
+	{!! Form::open(array('url' => 'projects', 'files'=>true, 'class' => 'uk-form', 'id' => 'newProjectForm')) !!}
 	<div class="uk-card uk-card-default uk-width-1-2@s uk-width-1-3@m uk-align-center uk-margin-large-top uk-animation-scale-up uk-transform-origin-bottom-center uk-card-hover">
 		<div class="uk-card-header project-icon-heading uk-background-cover" style="background-image: url('{!! asset('/images/newProject.jpg') !!}');"></div>
 	    <div class="uk-card-body">
