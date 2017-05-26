@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use User;
-use Project;
-use Item;
-use Tag;
-use Team;
-use Comment;
-use Auth;
 
-class ItemController extends Controller
+use App\Http\Requests;
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,37 +36,11 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-    	$user = Auth::user();
-
-    	$project_id = $request->input('project_id');
-    	$project = Project::find($project_id);
-
-    	$item = new Item;
-    	$item->title = $request->input('title');
-    	$item->description = $request->input('description');
-    	$item->save();
-
-    	$relation = $project->items()->save($item);
-    	$relation->createdBy = $user->id;
-    	$relation->save();
-
-    	$teams = $project->teams;
-    	foreach($teams as $team){
-    		if(isset($_POST[$team->name])){
-    			$relation = $item->teams()->save($team);
-    		}
-    	}
-
-    	$tags = $project->tags;
-    	foreach($tags as $tag){
-    		$nestedTags = $tag->tags;
-    		foreach($nestedTags as $nestedTag){
-    			if(isset($_POST[preg_replace('/\s+/', '_', $nestedTag->name)])){
-    				$relation = $item->tags()->save($nestedTag);
-    			}
-    		}
-    	}
-        return back();
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
     }
 
     /**
@@ -83,11 +51,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::find($id);
-        $comments = $item->comments;
-        $project = itemParentProject($id);
-
-        return view("item", ['item' => $item, 'comments' => $comments, 'project' => $project, ]);
+        
     }
 
     /**
@@ -121,8 +85,6 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $item = Item::find($id);
-        $item->delete();
-        return back();
+        //
     }
 }

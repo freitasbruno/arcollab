@@ -13,7 +13,7 @@
 			</div>
 	    </div>
 		@if (Session::has('message'))
-		   <div id="msg" class="uk-hidden">{{ Session::get('message') }}</div>
+		   <div id="message">{{ Session::get('message') }}</div>
 		@endif
     </div>
 @stop

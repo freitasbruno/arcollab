@@ -1,15 +1,13 @@
-var msg = $('#msg');
-$(msg).hide();
+$(document).ready(function(){
 
-if ($(msg).empty()) {
-    //alert ("hello");
-}else{
-    alert ("goodby");
-}
+    var msg = $('#message');
+    $(msg).hide();
 
-UIkit.notification({
-    message: "dfdlld",
-    status: 'success',
-    pos: 'top-center',
-    timeout: 5000
+    UIkit.notification({
+        message: $(msg).html(),
+        status: 'success',
+        pos: 'top-center',
+        timeout: 5000
+    });
+
 });

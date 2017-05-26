@@ -14,5 +14,3 @@
 	</body>
 
 </html>
-
-{!! Html::script('js/custom.js') !!}

@@ -6,7 +6,7 @@
 			</h5>
 		</div>
 		<div class="uk-margin-small-left uk-margin-small-right uk-padding-small uk-card-body">
-			{!! Form::open(array('url' => 'newItem', 'class' => 'uk-form-stacked')) !!}
+			{!! Form::open(array('url' => 'items', 'class' => 'uk-form-stacked')) !!}
 				{!! Form::hidden('project_id', $project->id) !!}
 				{!! Form::text('title', false, array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Item Title')) !!}
 				{!! Form::textarea('description', false, array('class' => 'uk-textarea uk-margin-small', 'placeholder' => 'Item Description', 'rows' => '2')) !!}

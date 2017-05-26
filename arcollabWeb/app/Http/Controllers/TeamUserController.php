@@ -25,12 +25,12 @@ class TeamUserController extends Controller {
 			$team = Team::find(Input::get('team_id'));
 			$relation = $team->users()->save($user);
 			*/
-			Session::flash('msg', $user->name . " has been added to the project");
-			$this->sendEmailInvite($to, $from);
+			Session::flash('message', $user->name . " has been added to the project");
+			//$this->sendEmailInvite($to, $from);
 			return back();
 		}else{
 			Session::flash('message', "Could not find user");
-			$this->sendEmailInvite($to, $from);
+			//$this->sendEmailInvite($to, $from);
 			return back();
 		}
 	}
