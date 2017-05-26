@@ -3,7 +3,7 @@
 function parentProject($group_id) {
 	$group = Group::find($group_id);
 	$project = $group->parentProject;
-	
+
 	if (!is_null($project)){
 		return $project;
 	}else{
@@ -15,7 +15,7 @@ function parentProject($group_id) {
 function teamParentProject($team_id) {
 	$team = Team::find($team_id);
 	$project = $team->parentProject;
-	
+
 	if (!is_null($project)){
 		return $project;
 	}else{
@@ -28,7 +28,7 @@ function itemParentProject($item_id) {
 	$item = Item::find($item_id);
 	$group = $item->parentGroup;
 	$project = parentProject($group->id);
-	
+
 	return $project;
 }
 

@@ -23,7 +23,7 @@ $users = $team->users;
 						@foreach ($childTeams as $childTeam)
 				            <tr>
 				                <td><span uk-icon="icon: users"></span></td>
-				                <td class="uk-table-link uk-text-left"><a class="uk-link-reset" href="/group/{{ $childTeam->id }}">{!! $childTeam->name !!}</a></td>
+				                <td class="uk-table-link uk-text-left"><a class="uk-link-reset" href="/team/{{ $childTeam->id }}">{!! $childTeam->name !!}</a></td>
 				            </tr>
 						@endforeach
 				    </tbody>

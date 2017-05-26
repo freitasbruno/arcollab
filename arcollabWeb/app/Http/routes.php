@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/test', function () {
+    //return view('test', array('var' => $var));
+    return back();
+});
+
 Route::get('/about', function () {
     return 'route to about page';
 });
@@ -67,7 +72,7 @@ Route::get('/logout', function () {
 });
 
 Route::post('newComment', 'NewCommentController@create');
-Route::post('addUser', 'AddUserController@create');
+Route::post('addUser', 'TeamUserController@create');
 
 Route::get('project/{id}/delete', ['as' => 'project.delete', 'uses' => 'ProjectController@destroy']);
 Route::resource('projects', 'ProjectController');

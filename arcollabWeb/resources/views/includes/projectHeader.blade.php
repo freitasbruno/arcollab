@@ -23,7 +23,14 @@
 			    	</div>
 
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
-					    <li class="uk-padding-remove-horizontal"><a href="/projects/{{ $project->id }}">ISSUES</a></li>
+					    <li class="uk-padding-remove-horizontal">
+							<a href="/projects/{{ $project->id }}"></span>ISSUES</a>
+						</li>
+					    <li>
+							<a href="#">DOCUMENTS</a>
+						</li>
+					</ul>
+					<ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-right" uk-margin>
 					    <li><a href="/tags/{{ $project->id }}">TAGS</a></li>
 					    <li><a href="/teams/{{ $project->id }}">TEAMS</a></li>
 					</ul>
