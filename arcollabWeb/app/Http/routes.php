@@ -74,7 +74,6 @@ Route::get('/logout', function () {
 Route::resource('users', 'UserController');
 
 Route::post('newComment', 'NewCommentController@create');
-Route::post('addUser', 'TeamUserController@create');
 
 Route::get('project/{id}/delete', ['as' => 'project.delete', 'uses' => 'ProjectController@destroy']);
 Route::resource('projects', 'ProjectController');
@@ -87,6 +86,7 @@ Route::get('teams/{project_id}', 'TeamController@index');
 Route::get('team/{id}', 'TeamController@show');
 Route::post('newTeam', 'TeamController@store');
 Route::get('deleteTeam/{id}', 'TeamController@destroy');
+Route::post('team/{id}/addUser', 'TeamController@addUser');
 
 Route::get('deleteItem/{id}', ['as' => 'item.delete', 'uses' => 'ItemController@destroy']);
 Route::resource('items', 'ItemController');
