@@ -9,10 +9,10 @@
 			</a>
 		</div>
 		<div class="uk-card-footer uk-padding-small">
-			<p class="uk-padding-remove-vertical">
-				<span class="uk-badge uk-margin-right">{{ countProjectGroups($project) }}</span>Project Groups
+			<p class="uk-padding-remove-vertical uk-align-left">
+				<span class="uk-label uk-label-warning uk-margin-right">{{ countProjectIssues($project) }}</span>New Issues
 				<br>
-				<span class="uk-badge uk-margin-right">{{ countProjectIssues($project) }}</span>Project Issues
+				<span class="uk-label uk-margin-right">{{ countProjectIssues($project) }}</span>Total Issues
 			</p>
 		</div>
 	</div>

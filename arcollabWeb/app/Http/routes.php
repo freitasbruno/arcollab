@@ -73,7 +73,7 @@ Route::get('/logout', function () {
 
 Route::resource('users', 'UserController');
 
-Route::post('newComment', 'NewCommentController@create');
+Route::resource('comments', 'CommentController');
 
 Route::get('project/{id}/delete', ['as' => 'project.delete', 'uses' => 'ProjectController@destroy']);
 Route::resource('projects', 'ProjectController');

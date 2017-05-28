@@ -1,17 +1,5 @@
 <?php
 
-function parentProject($group_id) {
-	$group = Group::find($group_id);
-	$project = $group->parentProject;
-
-	if (!is_null($project)){
-		return $project;
-	}else{
-		$parentGroup = $group->parentGroup;
-		return parentProject($parentGroup->id);
-	}
-}
-
 function teamParentProject($team_id) {
 	$team = Team::find($team_id);
 	$project = $team->parentProject;
@@ -22,14 +10,6 @@ function teamParentProject($team_id) {
 		$parentTeam = $team->parentTeam;
 		return teamParentProject($parentTeam->id);
 	}
-}
-
-function itemParentProject($item_id) {
-	$item = Item::find($item_id);
-	$group = $item->parentGroup;
-	$project = parentProject($group->id);
-
-	return $project;
 }
 
 function countProjectGroups($project) {
@@ -51,11 +31,7 @@ function countGroups($group) {
 }
 
 function countProjectIssues($project) {
-	$groups = $project->groups;
-	$count = 0;
-	foreach($groups as $group){
-		$count += countGroupIssues($group);
-	}
+	$count = count($project->items);
 	return $count;
 }
 

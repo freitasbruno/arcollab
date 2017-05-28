@@ -7,7 +7,7 @@ $comments = $item->comments;
 		<div class="uk-position-small uk-position-right uk-light">
 			<a href="/deleteItem/{{ $item->id }}" uk-icon="icon: close; ratio: 0.8"></a>
 		</div>
-	    <a href="/item/{{ $item->id }}">
+	    <a href="/items/{{ $item->id }}">
 			<div class="uk-card-secondary uk-card-header uk-padding-small itemColor">
 				<h5 class="uk-margin-remove-bottom">
 					<span class="uk-margin-right" uk-icon="icon: warning;"></span><span class="uk-text-bottom">{{ $item->title }}</span>

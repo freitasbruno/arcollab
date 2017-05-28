@@ -1,8 +1,8 @@
-<?php 
+<?php
 	$user = User::find($comment->createdBy);
 	$files = $comment->attachements;
 ?>
-					
+
 <div>
     <div class="uk-card uk-card-default uk-card-hover  uk-margin-bottom">
     	<div class="uk-card-header uk-padding-small uk-background-muted comment-header">
@@ -15,9 +15,10 @@
         	<ul class="uk-list">
         	@foreach ($files as $file)
         		<li><a class="uk-link-muted" href="/uploads/{!! $file->filename !!}" target="_blank"><span uk-icon="icon: download"></span></a>{!! $file->originalName !!}</li>
-        	@endforeach	
+        	@endforeach
+			@each('includes/fileCard', $files, 'file')
         	</ul>
-        	
+
         </div>
     </div>
 </div>

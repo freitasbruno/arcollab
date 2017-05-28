@@ -58,14 +58,23 @@ class ItemController extends Controller
 
     	$teams = $project->teams;
     	foreach($teams as $team){
+            $nestedTeams = $team->teams;
     		if(isset($_POST[$team->name])){
     			$relation = $item->teams()->save($team);
+    		}
+            foreach($nestedTeams as $nestedTeam){
+    			if(isset($_POST[preg_replace('/\s+/', '_', $nestedTeam->name)])){
+    				$relation = $item->teams()->save($nestedTeam);
+    			}
     		}
     	}
 
     	$tags = $project->tags;
     	foreach($tags as $tag){
     		$nestedTags = $tag->tags;
+            if(isset($_POST[preg_replace('/\s+/', '_', $tag->name)])){
+                $relation = $item->tags()->save($tag);
+            }
     		foreach($nestedTags as $nestedTag){
     			if(isset($_POST[preg_replace('/\s+/', '_', $nestedTag->name)])){
     				$relation = $item->tags()->save($nestedTag);
@@ -85,9 +94,9 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $comments = $item->comments;
-        $project = itemParentProject($id);
+        $project = $item->parentProject;
 
-        return view("item", ['item' => $item, 'comments' => $comments, 'project' => $project, ]);
+        return view("item", ['item' => $item, 'comments' => $comments, 'project' => $project]);
     }
 
     /**

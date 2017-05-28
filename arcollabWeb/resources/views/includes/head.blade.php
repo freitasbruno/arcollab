@@ -12,7 +12,7 @@
     {!! Html::style('css/style.css') !!}
 
     <!-- js -->
-    {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js') !!}
+    {!! Html::script('https://code.jquery.com/jquery-2.2.4.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/uikit.min.js') !!}
     {!! Html::script('js/uikit-icons.min.js') !!}
