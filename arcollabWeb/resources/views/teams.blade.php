@@ -12,8 +12,7 @@
 				@include('forms/formNewTeam')
 			</div>
 	    </div>
-		@if (Session::has('message'))
-		   <div id="message">{{ Session::get('message') }}</div>
-		@endif
     </div>
 @stop
+
+

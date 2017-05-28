@@ -25,11 +25,11 @@ class TeamUserController extends Controller {
 			$team = Team::find(Input::get('team_id'));
 			$relation = $team->users()->save($user);
 			*/
-			Session::flash('message', $user->name . " has been added to the project");
-			//$this->sendEmailInvite($to, $from);
+			Session::flash('msgSuccess', $user->name . " has been added to the project");
+			$this->sendEmailInvite($to, $from);
 			return back();
 		}else{
-			Session::flash('message', "Could not find user");
+			Session::flash('msgWarning', "Could not find user");
 			//$this->sendEmailInvite($to, $from);
 			return back();
 		}
@@ -39,7 +39,7 @@ class TeamUserController extends Controller {
     {
         Mail::send('emails.invite', ['to' => $to], function ($m) use ($to, $from){
             $m->from('freitascbruno@gmail.com', 'ARCOLLAB');
-            $m->to($to, 'user')->subject($from->name . 'invited you to collaborate on a project!');
+            $m->to($to, 'user')->subject($from->name . ' invited you to collaborate on a project!');
         });
     }
 }

@@ -8,7 +8,7 @@
     <title>ARCOLLAB</title>
 
     <!-- css -->
-    {!! Html::style('css/uikit.min.css') !!}
+    {!! Html::style('css/uikit.css') !!}
     {!! Html::style('css/style.css') !!}
 
     <!-- js -->

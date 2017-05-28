@@ -5477,7 +5477,7 @@ ul.uk-nav-sub {
   margin-bottom: 10px;
   padding: 15px;
   background: #f8f8f8;
-  color: #666;
+  color: #FFF;
   font-size: 1.25rem;
   line-height: 1.4;
   cursor: pointer;
@@ -5500,25 +5500,25 @@ ul.uk-nav-sub {
  * Primary
  */
 .uk-notification-message-primary {
-  color: #1e87f0;
+  background-color: #1e87f0;
 }
 /*
  * Success
  */
 .uk-notification-message-success {
-  color: #32d296;
+  background-color: #32d296;
 }
 /*
  * Warning
  */
 .uk-notification-message-warning {
-  color: #faa05a;
+  background-color: #faa05a;
 }
 /*
  * Danger
  */
 .uk-notification-message-danger {
-  color: #f0506e;
+  background-color: #f0506e;
 }
 /* ========================================================================
    Component: Tooltip
