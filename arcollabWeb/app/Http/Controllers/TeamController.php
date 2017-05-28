@@ -134,7 +134,7 @@ class TeamController extends Controller
 			$relation = $team->users()->save($user);
 			*/
 			Session::flash('msgSuccess', $user->name . " has been added to the {$project->name} project");
-			//$this->sendEmailInvite($to, $from);
+			$this->sendEmailInvite($to, $from, $team, $project);
 			return back();
 		}else{
 			Session::flash('msgWarning', "Could not find user");
@@ -143,11 +143,11 @@ class TeamController extends Controller
 		}
 	}
 
-    public function sendEmailInvite($to, $from)
+    public function sendEmailInvite($to, $from, $team, $project)
     {
-        Mail::send('emails.invite', ['to' => $to], function ($m) use ($to, $from){
+        Mail::send('emails.invite', ['from' => $from, 'team' => $team, 'project' => $project], function ($m) use ($to, $from, $project){
             $m->from('freitascbruno@gmail.com', 'ARCOLLAB');
-            $m->to($to, 'user')->subject($from->name . ' invited you to collaborate on a project!');
+            $m->to($to, 'user')->subject($from->name . ' invited you to collaborate on the ' . $project->name . ' project!');
         });
     }
 }

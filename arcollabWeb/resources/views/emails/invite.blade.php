@@ -1,1 +1,9 @@
-<?php echo "YOUR EMAIL ADDRESS IS: " . $to; ?>
+<?php
+
+echo "INVITATION FROM: " . $from->name;
+echo "<br>";
+echo "TEAM: " . $team->name;
+echo "<br>";
+echo "PROJECT: " . $project->name;
+
+?>

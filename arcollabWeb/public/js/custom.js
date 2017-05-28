@@ -1,5 +1,3 @@
-//$('.notification').hide();
-
 $(document).ready(function(){
 
     var msgSuccess = $('#msgSuccess').html();
