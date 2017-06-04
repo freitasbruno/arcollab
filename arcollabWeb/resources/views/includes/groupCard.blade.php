@@ -1,44 +1,41 @@
 <?php
-$childGroups = $group->groups;
 $items = $group->items;
 ?>
-
-<div>
+<li>
 	<div class="uk-card uk-card-default uk-card-hover">
 		<div class="uk-position-small uk-position-right uk-light">
 			<a href="/deleteGroup/{{ $group->id }}" uk-icon="icon: close; ratio: 0.8"></a>
 		</div>
 	    <a href="/group/{{ $group->id }}" class="uk-link-reset">
 			<div class="uk-card-secondary uk-card-header uk-padding-small groupColor">
-				
 		   		<h4 class="uk-margin-remove-vertical">
 				<span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.3"></span><span class="uk-text-bottom">{{ $group->name }}</span>
 				</h4>
 			</div>
 		</a>
 		<div class="uk-card-body uk-padding-remove">
-			@if(count($childGroups) >= 1)
-			<div class="uk-overflow-auto">
-			    <table class="uk-table uk-table-hover uk-table-middle">
-			        <tbody>
-						@foreach ($childGroups as $childGroup)
-				            <tr>
-				                <td><span uk-icon="icon: folder"></span></td>
-				                <td class="uk-table-link uk-text-left"><a class="uk-link-reset" href="/group/{{ $childGroup->id }}">{!! $childGroup->name !!}</a></td>
-				            </tr>
-						@endforeach	            
-				    </tbody>
-				</table>
-			</div>
-			@endif
-				
 			<div class="uk-overflow-auto">
 				<ul uk-accordion>
-					@if(count($items) >= 1)
-				    <li>
+					@if(count($items) >= 0)
+				    <li class="uk-open uk-padding-small">
 				        <h3 class="uk-accordion-title uk-padding-small">{!! count($items)!!} ISSUES</h3>
 				        <div class="uk-accordion-content">
-				        	<ul class="uk-list">
+							<div uk-sortable="group: sortable-item">
+					            <div class="uk-margin">
+					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 1</div>
+					            </div>
+					            <div class="uk-margin">
+					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 2</div>
+					            </div>
+					            <div class="uk-margin">
+					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 3</div>
+					            </div>
+					            <div class="uk-margin">
+					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 4</div>
+					            </div>
+					        </div>
+
+							<ul class="uk-list">
 							    <li>
 									<table class="uk-table uk-table-hover uk-table-middle">
 								        <tbody>
@@ -51,7 +48,7 @@ $items = $group->items;
 									            </tr>
 											@endforeach
 								        </tbody>
-								    </table>			    	
+								    </table>
 							    </li>
 							</ul>
 				        </div>
@@ -61,14 +58,16 @@ $items = $group->items;
 				    @endif
 				</ul>
 			</div>
-			
+
 		</div>
-		<div class="uk-card-footer uk-padding-small">	
+		{{--
+		<div class="uk-card-footer uk-padding-small">
 			<p class="uk-padding-remove-vertical">
 				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Group Issues
 				<br>
 				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Unread Issues
 			</p>
 		</div>
+		--}}
 	</div>
-</div>
+</li>

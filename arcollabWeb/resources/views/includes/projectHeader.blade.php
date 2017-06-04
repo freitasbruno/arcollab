@@ -24,9 +24,12 @@
 
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
 					    <li class="uk-padding-remove-horizontal">
+							<a href="/groups/{{ $project->id }}"></span>GROUPS</a>
+						</li>
+						<li>
 							<a href="/projects/{{ $project->id }}"></span>ISSUES</a>
 						</li>
-					    <li>
+						<li>
 							<a href="#">DOCUMENTS</a>
 						</li>
 					</ul>

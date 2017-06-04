@@ -17,9 +17,12 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $user = Auth::user();
+        $project = Project::find($id);
+        $groups = $user->projectGroups($project)->get();
+		return view("groups", ['project' => $project, 'groups' => $groups]);
     }
 
     /**
@@ -49,20 +52,15 @@ class GroupController extends Controller
         if (!empty($request->input('project_id'))){
             $project_id = $request->input('project_id');
             $project = Project::find($project_id);
-            $relation = $project->groups()->save($group);
-            $redirect = 'project/'.$project_id;
-        }elseif (!empty($request->input('group_id'))){
-            $parentGroup_id = $request->input('group_id');
-            $parentGroup = Group::find($parentGroup_id);
-            $relation = $parentGroup->groups()->save($group);
-            $redirect = 'group/'.$parentGroup_id;
+            $relation = $user->projectGroups($project)->save($group);
         }else{
             return back();
         }
-        $relation->createdBy = $user->id;
+
+        //$relation->createdBy = $user->id;
         $relation->save();
 
-        return Redirect::to($redirect);
+        return back();
     }
 
     /**

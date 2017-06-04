@@ -91,5 +91,6 @@ Route::post('team/{id}/addUser', 'TeamController@addUser');
 Route::get('deleteItem/{id}', ['as' => 'item.delete', 'uses' => 'ItemController@destroy']);
 Route::resource('items', 'ItemController');
 
-Route::get('group/{id}/delete', ['as' => 'group.delete', 'uses' => 'GroupController@destroy']);
+Route::get('deleteGroup/{id}', ['as' => 'group.delete', 'uses' => 'GroupController@destroy']);
+Route::get('groups/{id}', ['as' => 'groups', 'uses' => 'GroupController@index']);
 Route::resource('groups', 'GroupController');

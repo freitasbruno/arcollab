@@ -9,7 +9,7 @@ class Project extends \NeoEloquent {
 
     public function groups()
     {
-        return $this->hasMany('Group', 'HAS_GROUP');
+        return $this->morphMany('Group', 'ON');
     }
 
     public function items()
