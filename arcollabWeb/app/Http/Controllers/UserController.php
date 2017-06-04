@@ -41,6 +41,14 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
+
+        $user = new User;
+        $user->email = $request->input('email');
+        $user->name = $request->input('name');
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+        
+        return view('login', array('UserEmail' => $user->email));
     }
 
     /**
@@ -51,7 +59,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**

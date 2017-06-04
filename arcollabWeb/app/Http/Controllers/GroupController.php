@@ -21,8 +21,14 @@ class GroupController extends Controller
     {
         $user = Auth::user();
         $project = Project::find($id);
+
         $groups = $user->projectGroups($project)->get();
-		return view("groups", ['project' => $project, 'groups' => $groups]);
+        $sortedGroups = $groups->sortBy ('id');
+
+		$teams = $project->teams;
+		$tags = $project->tags;
+
+		return view("groups", ['project' => $project, 'groups' => $sortedGroups, 'teams' => $teams, 'tags' => $tags]);
     }
 
     /**

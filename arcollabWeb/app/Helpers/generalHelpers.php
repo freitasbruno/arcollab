@@ -37,10 +37,6 @@ function countProjectIssues($project) {
 
 function countGroupIssues($group) {
 	$count = count($group->items);
-	$nestedGroups = $group->groups;
-	foreach($nestedGroups as $nestedGroup){
-		$count += countGroupIssues($nestedGroup);
-	}
 	return $count;
 }
 

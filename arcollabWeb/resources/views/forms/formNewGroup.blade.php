@@ -4,6 +4,7 @@
 			<h4 class="uk-margin-remove-bottom">
 			<span class="uk-margin-right" uk-icon="icon: folder; ratio: 1.3"></span><span class="uk-text-bottom">NEW GROUP</span>
 			</h4>
+			<button class="uk-modal-close-default uk-align-right" type="button" uk-close></button>
 		</div>
 		<div class="uk-margin-small-left uk-margin-small-right uk-card-body">
 			{!! Form::open(array('url' => 'groups', 'class' => 'uk-form')) !!}

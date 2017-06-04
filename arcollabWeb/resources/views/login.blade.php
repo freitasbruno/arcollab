@@ -1,3 +1,9 @@
+<?php
+ 	if (!isset($UserEmail)){
+ 		$UserEmail = "";
+ 	}
+?>
+
 @extends('layouts.masterBgImage')
 
 @section('header')
@@ -13,7 +19,7 @@
 			    </div>
 			    <div class="uk-card-body uk-padding-small">
 					{!! Form::open(array('url' => 'login', 'class' => 'uk-form')) !!}
-						{!! Form::email('email', '', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Email Address')) !!}
+						{!! Form::email('email', $UserEmail, array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Email Address')) !!}
 						{!! Form::password('password', array('class' => 'uk-input uk-margin-small', 'placeholder' => 'Password')) !!}
 						{!! Form::submit('GO!', array('class' => 'uk-margin-small uk-button uk-button-default uk-width-1-1 uk-button-primary')) !!}
 					{!! Form::close() !!}

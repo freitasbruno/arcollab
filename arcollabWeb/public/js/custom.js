@@ -1,5 +1,15 @@
 $(document).ready(function(){
 
+    $(".toggleGroupFormBtn").click(function(){
+    	$(".toggleGroupFormBtn").toggleClass("uk-hidden");
+        $(".toggleGroupForm").toggleClass("uk-hidden");
+    });
+
+    $(".toggleBtn").click(function(){
+        console.log("Toggle card contents");
+        $(this).closest(".toggleWrapper").find(".toggleContent").toggleClass("uk-hidden");
+    });
+
     var msgSuccess = $('#msgSuccess').html();
     var msgWarning = $('#msgWarning').html();
     var msgError = $('#msgError').html();
@@ -30,7 +40,6 @@ $(document).ready(function(){
             });
         }
     });
-
 });
 
 function notify(type, message, timeout = 5000) {

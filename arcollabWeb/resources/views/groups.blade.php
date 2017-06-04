@@ -10,10 +10,10 @@
 	    	<h3 class="uk-heading-line"><span>GROUPS</span></h3>
 			<ul class="uk-grid-medium uk-child-width-1-2 uk-child-width-1-4@s" uk-sortable="handle: .uk-card" uk-grid>
 				@each('includes/groupCard', $groups, 'group')
-				<li class="uk-sortable-nodrag">
-					@include('forms/formNewGroup')
-				</li>
 			</ul>
 	    </div>
     </div>
+
+	@include('forms/formModal')
+
 @stop

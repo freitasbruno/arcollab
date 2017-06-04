@@ -7,6 +7,7 @@ use App\Http\Requests;
 use User;
 use Project;
 use Item;
+use Group;
 use Tag;
 use Team;
 use Comment;
@@ -56,10 +57,14 @@ class ItemController extends Controller
     	$relation->createdBy = $user->id;
     	$relation->save();
 
+        $group = Group::find($user->inbox);
+        $relation = $group->items()->save($item);
+    	$relation->save();
+
     	$teams = $project->teams;
     	foreach($teams as $team){
             $nestedTeams = $team->teams;
-    		if(isset($_POST[$team->name])){
+    		if(isset($_POST[preg_replace('/\s+/', '_', $team->name)])){
     			$relation = $item->teams()->save($team);
     		}
             foreach($nestedTeams as $nestedTeam){

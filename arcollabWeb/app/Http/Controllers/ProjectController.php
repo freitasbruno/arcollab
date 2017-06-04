@@ -70,7 +70,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
+        $user = Auth::user();
+        
         // Creating the project and saving the relation to the user
         $project = new Project;
 		$project->name = $request->input('name');
@@ -109,6 +110,16 @@ class ProjectController extends Controller
         }else{
             return ('Image not valid');
         }
+
+        $groups = ['INBOX', 'TO DO', 'IN PROGRESS', 'COMPLETE'];
+        foreach ($groups as $groupName) {
+            $group = new Group;
+            $group->name = $groupName;
+            $group->save();
+            $relation = $user->projectGroups($project)->save($group);
+            $relation->save();
+        }
+
         return back();
     }
 

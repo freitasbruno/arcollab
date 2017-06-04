@@ -21,13 +21,14 @@
 				    		<p>{!! $project->description !!}</p>
 			    		@endif
 			    	</div>
-
 			        <ul class="uk-subnav uk-subnav-divider uk-text-bold uk-position-small uk-position-bottom-left" uk-margin>
 					    <li class="uk-padding-remove-horizontal">
 							<a href="/groups/{{ $project->id }}"></span>GROUPS</a>
+							<a href="#modal-formNewGroup" uk-toggle uk-icon="icon: plus-circle; ratio: 0.8" class="uk-margin-left"></a>
 						</li>
 						<li>
 							<a href="/projects/{{ $project->id }}"></span>ISSUES</a>
+							<a href="#modal-formNewItem" uk-toggle uk-icon="icon: plus-circle; ratio: 0.8" class="uk-margin-left"></a>
 						</li>
 						<li>
 							<a href="#">DOCUMENTS</a>

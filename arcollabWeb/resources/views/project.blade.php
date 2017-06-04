@@ -10,8 +10,10 @@
 	    	<h3 class="uk-heading-line"><span>ISSUES</span></h3>
 	    	<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l" uk-grid>
 				@each('includes/itemCard', $items, 'item')
-				@include('forms/formNewItem')
 			</div>
 	    </div>
     </div>
+
+	@include('forms/formModal')
+
 @stop

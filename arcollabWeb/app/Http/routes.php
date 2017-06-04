@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    //return view('test', array('var' => $var));
     return back();
 });
 

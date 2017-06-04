@@ -2,8 +2,9 @@
 $items = $group->items;
 ?>
 <li>
-	<div class="uk-card uk-card-default uk-card-hover">
+	<div class="uk-card uk-card-default uk-card-hover uk-margin-bottom toggleWrapper">
 		<div class="uk-position-small uk-position-right uk-light">
+			<a href="#" uk-icon="icon: minus-circle; ratio: 0.8" class="toggleBtn"></a>
 			<a href="/deleteGroup/{{ $group->id }}" uk-icon="icon: close; ratio: 0.8"></a>
 		</div>
 	    <a href="/group/{{ $group->id }}" class="uk-link-reset">
@@ -13,54 +14,19 @@ $items = $group->items;
 				</h4>
 			</div>
 		</a>
-		<div class="uk-card-body uk-padding-remove">
-			<div class="uk-overflow-auto">
-				<ul uk-accordion>
-					@if(count($items) >= 0)
-				    <li class="uk-open uk-padding-small">
-				        <h3 class="uk-accordion-title uk-padding-small">{!! count($items)!!} ISSUES</h3>
-				        <div class="uk-accordion-content">
-							<div uk-sortable="group: sortable-item">
-					            <div class="uk-margin">
-					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 1</div>
-					            </div>
-					            <div class="uk-margin">
-					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 2</div>
-					            </div>
-					            <div class="uk-margin">
-					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 3</div>
-					            </div>
-					            <div class="uk-margin">
-					                <div class="uk-card uk-card-default uk-card-body uk-card-small">Item 4</div>
-					            </div>
-					        </div>
-
-							<ul class="uk-list">
-							    <li>
-									<table class="uk-table uk-table-hover uk-table-middle">
-								        <tbody>
-											@foreach ($items as $item)
-									            <tr>
-									                <td><span uk-icon="icon: warning"></span></td>
-									                <td class="uk-table-link">
-									                    <a class="uk-link-reset" href="/item/{{ $item->id }}">{!! $item->title !!}</a>
-									                </td>
-									            </tr>
-											@endforeach
-								        </tbody>
-								    </table>
-							    </li>
-							</ul>
-				        </div>
-				    </li>
-				    @else
-				    	<li><h4 class="uk-padding-small uk-margin-remove-bottom">NO ISSUES</h4></li>
-				    @endif
-				</ul>
-			</div>
-
+		<div class="uk-card-body uk-padding-small toggleContent">
+			<div uk-sortable="group: sortable-item">
+				@foreach ($items as $item)
+	            <div class="uk-card uk-card-hover uk-margin-small">
+					<a class="uk-link-reset" href="/items/{{ $item->id }}">
+		                <div class="uk-card uk-card-default uk-card-body uk-card-small">
+							<span uk-icon="icon: warning" class="uk-margin-small-right"></span>{!! $item->title !!}
+						</div>
+					</a>
+	            </div>
+				@endforeach
+	        </div>
 		</div>
-		{{--
 		<div class="uk-card-footer uk-padding-small">
 			<p class="uk-padding-remove-vertical">
 				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Group Issues
@@ -68,6 +34,5 @@ $items = $group->items;
 				<span class="uk-badge uk-margin-right">{{ countGroupIssues($group) }}</span>Unread Issues
 			</p>
 		</div>
-		--}}
 	</div>
 </li>
